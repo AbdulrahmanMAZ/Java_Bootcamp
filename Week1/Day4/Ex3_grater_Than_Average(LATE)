@@ -1,0 +1,23 @@
+
+public static void main(String[] args) {
+
+        int[] a = {2,3,40,1,5,9,4,10,7};
+        int average = 0;
+        ArrayList<Integer> greaterThanAverage = new ArrayList<Integer>();
+
+
+        for (int i = 0; i < a.length; i++) {
+            average += a[i];
+        }
+        average = average / a.length;
+        for (int i = 0; i < a.length; i++)
+        {
+            if (a[i]  > average) {
+                greaterThanAverage.add(a[i]);
+            }
+        }
+        System.out.println("The average is "+ average + " and the elements that is greater are: " + greaterThanAverage);
+
+
+
+}

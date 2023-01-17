@@ -1,0 +1,33 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class ExX {
+    public static void main(String[] args) {
+        int[] numbers = {1,2,1,3,2,5,5,5,1};
+        int number ;
+        int c =0;
+        Scanner sn = new Scanner(System.in);
+        System.out.println("Enter the number: ");
+        number = sn.nextInt();
+        for (int num: numbers) {
+            if (num == number){
+                int counter = 0;
+
+                for (int i = 0; i < numbers.length; i++) {
+                    if (numbers[i]==number){
+                        counter++;
+
+                    }
+                }
+                c = counter;
+                break;
+            }
+        }
+        System.out.println(number+" occurs " + c+" times");
+
+
+
+    }
+
+}

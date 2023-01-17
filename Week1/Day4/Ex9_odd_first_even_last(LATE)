@@ -1,0 +1,19 @@
+public class Main {
+    public static void main(String[] args) {
+
+//        Scanner sn = new Scanner(System.in);
+//        int s = sn.nextInt();
+
+        int[] a = {2,3,40,1,5,9,4,10,7};
+        ArrayList<Integer> oddFirst = new ArrayList<Integer>();
+        for (int i = 0; i < a.length; i++) {
+            if (a[i]%2!=0) oddFirst.add(a[i]);
+        }
+        for (int i = 0; i < a.length; i++) {
+            if (a[i]%2==0) oddFirst.add(a[i]);
+        }
+        System.out.println(oddFirst);
+
+
+
+}}

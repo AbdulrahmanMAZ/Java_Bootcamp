@@ -1,0 +1,15 @@
+public class ExX {
+    public static void main(String[] args) {
+        int[] nums = {2,3,4,5,6,21};
+        if (nums[0] > nums[nums.length-1]) {
+            System.out.println(nums[0]);
+        }else {
+            System.out.println(nums[nums.length-1]);
+
+        }
+
+
+
+    }
+
+}

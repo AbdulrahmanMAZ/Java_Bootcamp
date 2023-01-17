@@ -1,0 +1,25 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class ExX {
+    public static void main(String[] args) {
+       int[] firstArray = {1,2,3};
+        int[] secondArray = {2,2,3};
+        boolean equal = true;
+        if(firstArray.length != secondArray.length){
+            System.out.println("Not Equal");
+        }else{
+            for (int i = 0; i < firstArray.length; i++) {
+                if (firstArray[i] != secondArray[i]){
+                    equal = false;
+
+                }            }
+
+             System.out.println(equal);
+
+
+        }
+    }
+
+}
