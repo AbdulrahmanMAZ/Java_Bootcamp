@@ -1,0 +1,29 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Enter the first number");
+        Scanner number1 =new  Scanner(System.in);
+        int firstNumber = number1.nextInt();
+        System.out.println("Enter the second number");
+        Scanner number2 =new  Scanner(System.in);
+        int secondNumber = number2.nextInt();
+        System.out.println("Enter the last number");
+        Scanner number3 =new  Scanner(System.in);
+        int thirdNumber = number3.nextInt();
+        Ex7(firstNumber,secondNumber,thirdNumber);
+    }
+    static void Ex7(int first,int second , int third){
+        if (first > second && first > third) {
+            System.out.println(first);
+        }else if(second > first && second > third) {
+            System.out.println(second);
+
+        }
+        else if(third > first && third > second) {
+            System.out.println(third);
+
+        }
+
+    }
+}
