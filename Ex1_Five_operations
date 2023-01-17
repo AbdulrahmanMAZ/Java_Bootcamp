@@ -1,0 +1,23 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+
+
+        System.out.println("Enter the first number");
+        Scanner number1 =new  Scanner(System.in);
+        int firstNumber = number1.nextInt();
+        System.out.println("Enter the second number");
+        Scanner number2 =new  Scanner(System.in);
+        int secondNumber = number1.nextInt();
+
+        Ex1(firstNumber,secondNumber);
+    }
+    static void Ex1(int firstNumber , int secondNumber){
+
+        System.out.println(firstNumber +"+"+secondNumber+" = "+(firstNumber+secondNumber));
+        System.out.println(firstNumber +"-"+secondNumber+" = "+(firstNumber-secondNumber));
+        System.out.println(firstNumber +"*"+secondNumber+" = "+(firstNumber*secondNumber));
+        System.out.println(firstNumber +"/"+secondNumber+" = "+(firstNumber/secondNumber));
+        System.out.println(firstNumber +"%"+secondNumber+" = "+(firstNumber%secondNumber));
+    }}
