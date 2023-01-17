@@ -1,0 +1,22 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner s = new Scanner(System.in);
+        System.out.println("Enter Your number");
+        int num1 = s.nextInt();
+        System.out.println("Enter Your number");
+        int num2 = s.nextInt();
+        long power = 1;
+        for (int i = 1 ; i <= num2;i++){
+            power*= num1 ;
+        }
+
+        System.out.println(power);
+
+
+
+
+    }
+
+}

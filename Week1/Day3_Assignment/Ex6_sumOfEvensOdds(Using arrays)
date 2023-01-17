@@ -1,0 +1,27 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner s = new Scanner(System.in);
+        System.out.println("Enter Your number");
+        String num1 = s.nextLine();
+        String[] a = num1.split(" ");
+        int[] nums = new int[a.length];
+        int sumOfEvens = 0;
+        int sumOfOdds = 0;
+        for (int i = 0; i < nums.length; i++) {
+            nums[i] = Integer.parseInt(a[i]);
+        }
+        for (int num:nums) {
+            if (num%2==0) {
+                sumOfEvens+=num;
+            }else {
+                sumOfOdds +=num;
+            }
+        }
+System.out.println("Sum of the evens: "+sumOfEvens);
+        System.out.println("Sum of the odds"+sumOfOdds);
+
+    }
+
+}

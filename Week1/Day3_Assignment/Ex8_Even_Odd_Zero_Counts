@@ -1,0 +1,32 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner s = new Scanner(System.in);
+
+        int zeros= 0;
+        int evens = 0;
+        int odds= 0;
+        boolean stop = false;
+        while (!stop){
+            System.out.println("Enter Your number");
+            System.out.println("Enter Empty line to submit and exit");
+
+            String num1 = s.nextLine();
+            int newNums = 0;
+            if (num1.isEmpty() || num1.isBlank())break;else newNums = Integer.parseInt(num1);
+            if (newNums == 0) {
+                zeros++;
+            }
+            else if(newNums%2==0 && newNums!=0){
+                evens++;
+
+            } else {
+                odds++;
+            }       }
+        System.out.println("Sum of the evens: "+evens);
+        System.out.println("Sum of the odds: "+odds);
+        System.out.println("Sum of the zeros: "+zeros);
+    }
+
+}

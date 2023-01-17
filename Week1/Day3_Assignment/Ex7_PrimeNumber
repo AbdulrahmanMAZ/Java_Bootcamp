@@ -1,0 +1,21 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner s = new Scanner(System.in);
+        int p = s.nextInt();
+        if (p < 0) {
+            System.out.println("Your number is not positive");
+            return;
+        };
+        int cuonter = 0;
+        for (int i = 1; i < 100; i++) {
+            if (p%i==0 ){
+                cuonter ++;
+            }
+        }
+        if (cuonter == 2) {
+            System.out.println("Number is prime");
+
+        }    }
+}
