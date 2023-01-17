@@ -1,0 +1,116 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+
+
+        Scanner sn = new Scanner(System.in);
+
+//                Scanner sn2 = new Scanner(System.in);
+
+//                String[] array_of_numbers = {};
+        ArrayList<Integer> array_of_numbers = new ArrayList<Integer>();
+        boolean stop = false;
+
+        while(!stop){
+            System.out.println("Please Choose the operation: " +
+                    "\na. Accept elements of an array " +
+                    "\nb. Display elements of an array" +
+                    " \nc. Search the element within array" +
+                    "\nd. Sort the array the size of the array should be entered by the user." +
+                    "\n -1 To exit the program ");
+
+            String command = sn.nextLine();
+
+            if (command.equals("a")){
+                int size = 0;
+                try{
+                    System.out.println("Enter the size of the array: ");
+                    size = Integer.parseInt(sn.nextLine())-1;
+                    int index= 1;
+//                            array_of_numbers = new ArrayList<>(size);
+                    System.out.println("Enter the elements of the array (Numbers): ");
+                    while (size>=0){
+                        try {
+                            System.out.print(index +":");
+                            array_of_numbers.add(Integer.parseInt(sn.nextLine()));
+                            size--;
+                            index++;
+                        }catch(NumberFormatException e){
+
+                            System.out.println("Accept only numbers, please enter a number");
+                        }
+
+
+                    }
+
+                }catch (InputMismatchException e){
+                    System.out.println("Enter a number 1111");
+                }
+                catch (NumberFormatException e){
+                    System.out.println("The size of the array must be a number/valid integer ");
+                }
+                catch (IllegalArgumentException e){
+                    System.out.println("The size of the array must be a positive");
+                }
+                catch (Exception e){
+                    System.out.println("Enter a number in range of the array size which is:" + array_of_numbers.size() );
+                }
+
+
+            } else if (command.equals("b")) {
+                System.out.print("This is the Array");
+                System.out.println(Arrays.toString(array_of_numbers.toArray()));
+                System.out.println("\n\n");
+
+            }else if (command.equals("c")) {
+                System.out.println("Please Enter the index you want to search for");
+                Integer key = null;
+
+                try {
+                    key = Integer.parseInt(sn.nextLine());
+                    int number = array_of_numbers.get(key);
+                    System.out.println("The Element at index number "+ key +" is: "+number);
+                    System.out.println(array_of_numbers.get(key));
+                }
+                catch (InputMismatchException e){
+                    System.out.println("Enter a number");
+                }catch (NumberFormatException e){
+                    System.out.println("The input must be a number");
+
+                }
+                catch (IndexOutOfBoundsException e){
+                    System.out.println("Enter a number in range of the array size which is:" + array_of_numbers.size() );
+                }catch (Exception e){
+                    System.out.println("An error have occur" );
+                }
+
+            }else if (command.equals("d")) {
+                System.out.println("Please Enter the sorting method 1 for increasingly and 2 for decreasingly");
+                String sortMethod = sn.nextLine();
+                if (sortMethod.equals("1")) {
+                    Collections.sort(array_of_numbers);
+                    System.out.println(array_of_numbers);
+                } else if (sortMethod.equals("2")) {
+                    Collections.sort(array_of_numbers);
+                    ArrayList<Integer> reversedArray = new ArrayList<>();
+
+                    for (int i = array_of_numbers.size()-1; i >=0; i--) {
+                        reversedArray.add(array_of_numbers.get(i));
+                    }
+                    System.out.println(reversedArray);
+                    array_of_numbers = reversedArray;
+                }
+                else{
+                    System.out.println("The input must be 1 or 2");
+                }
+            }
+            else if (command.equals("-1")) {
+                stop = true;
+
+            }
+            else{
+                System.out.println("Enter a valid character");
+            }
+        }
+    }}

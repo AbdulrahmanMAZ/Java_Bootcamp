@@ -1,0 +1,224 @@
+import java.util.InputMismatchException;
+import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
+
+public class ExX {
+    private static char[][] chars = {{'1','2','3'},{'4','5','6'},{'7','8','9'}};
+    private static Scanner sn = new Scanner(System.in);
+    static int comp_score = 0;
+    static int user_score = 0;
+    public static void main(String[] args)  {
+        try {
+            game_Scenario();
+
+        }catch (InterruptedException e){
+
+        }
+        boolean gameOver = false;
+        while (!gameOver) {
+            if (user_score == 3 || comp_score == 3) {
+                break;
+            }
+            playingGuides();
+            Game();
+            resetGame();
+            printScoreBoard();
+
+        }
+        announceWinner();
+    }
+    public static void Game() {
+
+//        int userChoice =0 ;
+//        int computerChoice =0 ;
+
+        while(true){
+            if (isFull() == 9 && !win().equals("comp") && !win().equals("user")){
+                System.out.println("Game is Draw" );
+                break;
+            }
+            try {
+                Scanner ss = new Scanner(System.in);
+                int  userChoice = ss.nextInt();
+
+                int computerChoice = computerChoice(userChoice);
+                if (isValidMove(userChoice)){
+                    if (computerChoice == userChoice) {
+                        while(computerChoice == userChoice) {
+                            computerChoice = computerChoice(userChoice);
+
+                        }
+                    }
+                    userPlay(userChoice);
+                    if (win().equals("user")) {
+                        System.out.println("User wins round");
+                        user_score++;
+                        break;
+                    }
+                    if (isFull() != 9){
+                        computerPlay(computerChoice);
+                    }
+                    if (win().equals("comp")){
+                        System.out.println("Computer Wins round");
+                        comp_score++;
+                        break;
+                    }
+                }
+
+                else {
+                    System.out.println("The position is not valid");
+                    printGame(chars);}
+            }catch (InputMismatchException e){
+                System.out.println("You must enter a number" );
+            }
+
+        }
+
+    }
+    public static void userPlay(int user){
+        int [] userPosition = choiceToPosition(user);
+        chars[userPosition[0]][userPosition[1]] =  'X';
+        printGame( chars);
+    }
+    public static void computerPlay(int comp){
+
+        int [] compPosition = choiceToPosition(comp);
+        System.out.println("Computer chooses: "+ comp);
+        chars[compPosition[0]][compPosition[1]] = 'O' ;
+        char[][] afterComputerTurnArray = chars;
+        chars = afterComputerTurnArray;
+        printGame(afterComputerTurnArray);
+
+    }
+    private static void game_Scenario() throws InterruptedException {
+        System.out.println("The AI is trying to control the world");
+        TimeUnit.SECONDS.sleep(2);
+
+        System.out.print("You must stop it ");
+        TimeUnit.SECONDS.sleep(1);
+        System.out.print(".");
+        TimeUnit.SECONDS.sleep(1);
+        System.out.print(".");
+        TimeUnit.SECONDS.sleep(1);
+        System.out.print(".");
+        TimeUnit.SECONDS.sleep(1);
+
+        System.out.println("To do that you need to defeat it 3 times");
+        TimeUnit.SECONDS.sleep(3);
+    }
+
+    private static void playingGuides() {
+        System.out.println("Please Enter the number of your move according to this board");
+        System.out.println(1 + " |" + 2 + "| " + 3);
+        System.out.println(" -+ - +-");
+        System.out.println(4 + " |" + 5 + "| " + 6);
+        System.out.println(" -+ - +-");
+        System.out.println(7 + " |" + 8 + "| " + 9);
+    }
+
+    private static void announceWinner() {
+        if (user_score == 3){
+            System.out.println("=============Congratulation you have won the war ==========");
+            System.out.println("=============You saved the world ==========");
+        }
+        if(comp_score == 3)
+            System.out.println("=============You have lost the game==========");
+    }
+
+    private static void resetGame() {
+        chars = new char[][]{{'1','2','3'},{'4','5','6'},{'7','8','9'}};
+
+    }
+
+    private static void printScoreBoard() {
+
+        System.out.println(" ");
+        System.out.println("===============SCORE BOARD================");
+        System.out.print("        Computer:" + comp_score);
+        System.out.println("        User:" + user_score);
+        System.out.println("==========================================");
+        System.out.println("");
+    }
+
+    private static int[] choiceToPosition(int choice){
+        int[] position = {0,0};
+
+        if (choice == 1){ position[0]=0;position[1]=0;}
+        else if (choice == 2) {position[0]=0;position[1]=1;}
+        else if (choice == 3) {position[0]=0;position[1]=2;}
+        else if (choice == 4) {position[0]=1;position[1]=0;}
+        else if (choice == 5) {position[0]=1;position[1]=1;}
+        else if (choice == 6) {position[0]=1;position[1]=2;}
+        else if (choice == 7) {position[0]=2;position[1]=0;}
+        else if (choice == 8) {position[0]=2;position[1]=1;}
+        else if (choice == 9) {position[0]=2;position[1]=2;}
+
+        return position;
+
+    }
+    public static boolean isValidMove(int x){
+        int[] position = choiceToPosition(x);
+
+        if (chars[position[0]][position[1]] == 'X' || chars[position[0]][position[1]] == 'O') return false;
+        else if (x > 9 || x <1) return false;
+        else return true;
+    }
+
+    public static String win(){
+
+        if (chars[0][0] == 'X' && chars[0][1] == 'X' && chars[0][2] == 'X' ) {return  "user";}
+        else if (chars[1][0] == 'X' && chars[1][1] == 'X' && chars[1][2] == 'X' ) {return  "user";}
+        else if (chars[2][0] == 'X' && chars[2][1] == 'X' && chars[2][2] == 'X' ) {return  "user";}
+        else if (chars[0][0] == 'X' && chars[1][0] == 'X' && chars[2][0] == 'X' ) {return  "user";}
+        else if (chars[0][1] == 'X' && chars[1][1] == 'X' && chars[2][1] == 'X' ) {return  "user";}
+        else if (chars[0][2] == 'X' && chars[1][2] == 'X' && chars[2][2] == 'X' ) {return  "user";}
+
+        // Computer wins
+        else if (chars[0][0] == 'O' && chars[0][1] == 'O' && chars[0][2] == 'O') {return  "comp";
+        }else if (chars[1][0] == 'O' && chars[1][1] == 'O' && chars[1][2] == 'O' ) {return  "comp";
+        }else if (chars[2][0] == 'O' && chars[2][1] == 'O' && chars[2][2] == 'O' ) {return  "comp";
+        }else if (chars[0][0] == 'O' && chars[1][0] == 'O' && chars[2][0] == 'O' ) {return  "comp";
+        }else if (chars[0][1] == 'O' && chars[1][1] == 'O' && chars[2][1] == 'O') {return  "comp";
+        }else if (chars[0][2] == 'O' && chars[1][2] == 'O' && chars[2][2] == 'O' ) {return  "comp";}
+        else return "draw";
+    }
+    public static int isFull(){
+        int counter = 0;
+        for (char[] c : chars) {
+            for (char chr: c) {
+                if (chr == 'X' || chr == 'O') {
+                    counter++;
+                }
+
+            }
+        }
+
+
+        return counter;
+    }
+
+    public static int computerChoice(int userChoice){
+        int number=(int) (Math.random() * 10);;
+        if (isFull() == 8 || isFull() == 9) {
+            return 0;
+        }else {
+            {
+
+                while (number == userChoice || !isValidMove(number)) {
+
+                    number = (int) (Math.random() * 10);
+                }
+            }
+        }
+        return number;
+    }
+
+
+    public static void printGame(char[][] chars){
+        System.out.println( chars[0][0] +" | "+ chars[0][1] +" | "+ chars[0][2] );
+        System.out.println("- + - + -");
+        System.out.println(chars[1][0] +" | "+ chars[1][1] +" | "+ chars[1][2]);
+        System.out.println("- + - + -");
+        System.out.println(chars[2][0] +" | "+ chars[2][1] +" | "+ chars[2][2]);
+    }
+}
