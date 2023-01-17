@@ -1,0 +1,154 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+
+
+//        System.out.println("Enter the first number");
+//        Scanner number1 =new  Scanner(System.in);
+//        int firstNumber = number1.nextInt();
+//        System.out.println("Enter the second number");
+//        Scanner number2 =new  Scanner(System.in);
+//        int secondNumber = number1.nextInt();
+//
+        //Ex One
+        System.out.println("This is the first Exercise");
+        Ex1(14,11);
+
+        System.out.println("");
+        System.out.println("");
+
+        //Ex Two
+        System.out.println("This is the second Exercise");
+        Ex2("Hello");
+        System.out.println("\n\n");
+
+        //Ex Three
+        System.out.println("This is the third Exercise");
+        Ex3(55);
+        System.out.println("\n\n");
+
+        //Ex four
+        System.out.println("This is the fourth Exercise");
+        Ex4("Hello there");
+        System.out.println("\n\n");
+
+        //Ex fifth
+        System.out.println("This is the fifth Exercise");
+        Ex5("Admin");
+        System.out.println("\n\n");
+
+        //Ex sixth
+        System.out.println("This is the sixth Exercise");
+        Ex6(10,5,15);
+        System.out.println("\n\n");
+
+        //Ex seventh
+        System.out.println("This is the seventh Exercise");
+        Ex7(10,5,15);
+        System.out.println("\n\n");
+
+        //Ex eighteth
+        System.out.println("This is the eight Exercise");
+        Ex8(3);
+
+    }
+
+static void Ex1(int firstNumber , int secondNumber){
+
+    System.out.println("firstNumber+secondNumber "+(firstNumber+secondNumber));
+    System.out.println("firstNumber-secondNumber "+(firstNumber-secondNumber));
+    System.out.println("firstNumber*secondNumber "+(firstNumber*secondNumber));
+    System.out.println("firstNumber/secondNumber "+(firstNumber/secondNumber));
+    System.out.println("firstNumber%secondNumber "+(firstNumber%secondNumber));
+}
+
+    static void Ex2(String sentence){
+
+        System.out.println(sentence.toLowerCase());
+
+    }
+    static void Ex3(int number){
+        String str = ""+number;
+        int sum = 0;
+        for (int i = 0 ; i < str.length();i++){
+            sum += str.charAt(i)-'0';
+
+
+        }
+        System.out.println(sum);
+
+
+    }
+    static void Ex4(String sentence){
+       String reversedString = "";
+        for (int i = sentence.length()-1 ; i >= 0;i--){
+            reversedString += sentence.charAt(i);
+
+
+        }
+        System.out.println(reversedString);
+
+
+    }
+    static void Ex5(String role){
+        if (role == "Admin") {
+            System.out.println("Welcome Admin");
+        } else if (role == "superuser") {
+            System.out.println("Welcome superuser");
+
+        }else {
+            System.out.println("Welcome user");
+
+        }
+
+    }
+    static void Ex6(int first,int second , int third){
+        if ((first + second) == third) {
+            System.out.println("true");
+        }else {
+            System.out.println("false");
+
+        }
+
+    }
+    static void Ex7(int first,int second , int third){
+        if (first > second && first > third) {
+            System.out.println(first);
+        }else if(second > first && second > third) {
+            System.out.println(second);
+
+        }
+        else if(third > first && third > second) {
+            System.out.println(third);
+
+        }
+
+    }
+    static void Ex8( int day){
+        if (day == 1) {
+            System.out.println("Sunday");
+        }else if(day == 2) {
+            System.out.println("Monday");
+
+        }
+        else if(day == 3) {
+            System.out.println("Monday");
+
+        }
+        else if(day == 4) {
+            System.out.println("Tuesday");
+
+        }        else if(day == 5) {
+            System.out.println("Wenesday");
+
+        }
+        else if(day == 6) {
+            System.out.println("Friday");
+
+        }        else if(day == 7) {
+            System.out.println("Saterday");
+
+        }
+    }
+}
