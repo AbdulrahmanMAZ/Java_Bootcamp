@@ -4,11 +4,12 @@ import Assignment.book_movie.Book;
 
 public class Main {
     public static void main(String[] args) {
-        Movable point = new MovablePoint(0,0,30,30);
+        Movable point = new MovablePoint(0,0,30,10);
+        point.moveUp();
         point.moveUp();
         point.moveRight();
-        point.moveLeft();
-        point.moveDown();
+        point.moveRight();
+        System.out.println(point);
 
 
     }
