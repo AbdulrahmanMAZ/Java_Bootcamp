@@ -1,0 +1,25 @@
+1. The app will call the method because it is annotated with Bean. And the method will print hey from method.
+- hey from message1.
+
+
+2. To call getMessage2 the app needs to call getMessage1 first.
+- hey from message1
+- hey from message2
+
+
+3. The app will randomlly select getMessage3 or getMessage1 but getMessage2 need to call getMessage3 first.
+- hey from message1.
+- hey from message3.
+- hey from message2.
+
+4. MainController will run first but it dpenedsd on getMessage1 method and getMessage2 dpend on getMessage3. getMwssage1 andgetMessage3 will be randomly selected.
+- hey from message1.
+- hey from Main controller.
+- hey from message2.
+- hey from message3.
+
+5. MainController dpend on getMessage2, but getMessage2 depends on getMessage3, getMessage1 does not depend on any.
+- hey from message3.
+- hey from message2.
+- hey from Main controller.
+- hey from message1.
