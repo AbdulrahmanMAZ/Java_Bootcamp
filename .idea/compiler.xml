@@ -2,20 +2,29 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="Assignment-13" />
         <module name="Homework12" />
+        <module name="Assignment13-Bank" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="Assignment" target="17" />
+      <module name="Assignment-13" target="17" />
+      <module name="Assignment13-Bank" target="17" />
       <module name="Homework-12" target="17" />
       <module name="Homework12" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Assignment" options="-parameters" />
+      <module name="Assignment-13" options="-parameters" />
+      <module name="Assignment13-Bank" options="-parameters" />
       <module name="Homework-12" options="-parameters" />
       <module name="Homework12" options="-parameters" />
     </option>
