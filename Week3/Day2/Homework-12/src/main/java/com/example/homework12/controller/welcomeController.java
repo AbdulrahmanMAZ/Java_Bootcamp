@@ -11,7 +11,7 @@ public class welcomeController {
     }
     @GetMapping("/age")
     public String getAge(){
-        return "My name is: Abdulrahman";
+        return "My Age is: 25";
     }
     @GetMapping("/check/status")
     public String checkStatus(){
