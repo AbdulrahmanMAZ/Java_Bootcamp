@@ -2,9 +2,6 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/Week2/JavaBootcamp" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/Week3/Day3/Assignment13-Bank" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/Week3/Day4/Exersice" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/Week3/Day4/assignment14" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Week3/Day4/assignment-14" vcs="Git" />
   </component>
 </project>
