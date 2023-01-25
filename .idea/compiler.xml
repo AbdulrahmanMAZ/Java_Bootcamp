@@ -9,15 +9,14 @@
         <outputRelativeToContentRoot value="true" />
         <module name="Assignment-13" />
         <module name="Homework12" />
+        <module name="Exersice" />
         <module name="Assignment13-Bank" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Assignment" target="17" />
-      <module name="Assignment-13" target="17" />
-      <module name="Assignment13-Bank" target="17" />
+      <module name="Exercise" target="17" />
       <module name="Homework-12" target="17" />
-      <module name="Homework12" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -25,6 +24,8 @@
       <module name="Assignment" options="-parameters" />
       <module name="Assignment-13" options="-parameters" />
       <module name="Assignment13-Bank" options="-parameters" />
+      <module name="Exercise" options="-parameters" />
+      <module name="Exersice" options="-parameters" />
       <module name="Homework-12" options="-parameters" />
       <module name="Homework12" options="-parameters" />
     </option>
