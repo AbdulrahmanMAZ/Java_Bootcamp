@@ -1,0 +1,52 @@
+create database amazon;
+
+create table countries (
+    code int primary key not null ,
+    name varchar(20) unique,
+    continent_name varchar(20) unique
+);
+create table users (
+    id int primary key unique ,
+    full_name varchar(30) unique ,
+    email varchar(40) unique,
+    gender varchar(1)  ,
+    date_of_birth varchar(15) ,
+    created_at datetime default NOW() not null ,
+    country_code int ,
+    foreign key (country_code) references countries(code)
+
+);
+
+
+create table orders (
+    id int primary key unique,
+    user_id int,
+    status varchar(15) unique,
+    created_at datetime default NOW(),
+    foreign key (user_id) references users(id)
+);
+create table products(
+    id int primary key,
+    name varchar(10) not null ,
+    price int,
+    created_at datetime default NOW()
+);
+create table order_products(
+    order_id int  ,
+    product_id int unique ,
+    quantity int,
+     primary key (order_id, product_id),
+    foreign key (product_id) references products(id),
+    foreign key (order_id) references orders(id)
+
+);
+
+insert into countries values(1,'Saudi Arabia','Asia');
+insert into users values(1,'Abdulrahman','amaz.alfaifi@gmail.com',1,'1997',default,1);
+insert into orders values(10,1,'delivered',default);
+insert into products values(12,'iPhone',1300,default);
+insert into order_products values(10,12,1);
+
+
+
+select * from products;
