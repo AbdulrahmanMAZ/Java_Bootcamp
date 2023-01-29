@@ -46,7 +46,8 @@ insert into users values(1,'Abdulrahman','amaz.alfaifi@gmail.com',1,'1997',defau
 insert into orders values(10,1,'delivered',default);
 insert into products values(12,'iPhone',1300,default);
 insert into order_products values(10,12,1);
-
+UPDATE countries set name = 'SA' WHERE code = 1;
+DELETE FROM products WHERE  id=12 ;;
 
 
 select * from products;
