@@ -58,7 +58,7 @@ public class UserService {
             }
         }
         if (product == null)return false;
-        System.out.println("product found");
+//        System.out.println("product found");
 
 
         for (Merchant m: merchants.getMerchant()) {
@@ -67,7 +67,7 @@ public class UserService {
             }
         }
         if (merchant == null){return false;}
-        System.out.println("merchant found");
+//        System.out.println("merchant found");
         Random o = new Random();
         Random s = new Random();
 
