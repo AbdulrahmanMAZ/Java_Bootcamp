@@ -11,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Random;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -66,8 +68,13 @@ public class UserService {
         }
         if (merchant == null){return false;}
         System.out.println("merchant found");
+        Random o = new Random();
+        Random s = new Random();
 
-        stockService.addMerchantStock(new MerchantStock( String.valueOf((int)(Math.random()*10)),productID,merchantID,stock));
+        char oo = (char)(o.nextInt(26) + 'a');
+        char ss = (char)(o.nextInt(26) + 'a');
+
+        stockService.addMerchantStock(new MerchantStock( ss+oo+String.valueOf((int)(Math.random()*10)) ,productID,merchantID,stock));
 
         return true;
     }
@@ -115,11 +122,11 @@ public class UserService {
             if (s.getMerchantID().equals(merchantID) && s.getProductID().equals(productID)){
                 merchantHasProduct = true;
                 //Reduce the stockService by one if the user has money
+                int currentStockValue = s.getStock();
 
-                if (Double.parseDouble( user.getBalance()) >=Double.parseDouble( product.getPrice()) ){
+                if (Double.parseDouble( user.getBalance()) >=Double.parseDouble( product.getPrice()) && currentStockValue > 0 ){
                     userHasMoney = true;
                     MerchantStock temp = s;
-                    int currentStockValue = s.getStock();
                     temp.setStock(currentStockValue -1);
                     stockService.editMerchantStock(s.getId(),temp);
                     double currentUserBalance = Double.parseDouble( user.getBalance());
