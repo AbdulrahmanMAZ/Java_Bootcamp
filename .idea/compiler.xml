@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="Homework12" />
         <module name="Assignment13-Bank" />
+        <module name="assignment_15" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -16,7 +17,6 @@
       <module name="Assignment-13" target="17" />
       <module name="assignment-14" target="17" />
       <module name="assignment14" target="17" />
-      <module name="assignment_15" target="17" />
       <module name="Exercise" target="17" />
       <module name="Exercise_15" target="17" />
       <module name="Exersice" target="17" />
