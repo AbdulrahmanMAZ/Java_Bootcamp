@@ -18,20 +18,26 @@ public class UserService {
 
         return users;
     }
-    public void addUser(User bootcamp) {
+    public void addUser(User user) {
 
-        userRepo.save(bootcamp);
+        userRepo.save(user);
     }
-    public boolean editUser(Integer id, User bootcamp) {
+    public boolean editUser(Integer id, User user) {
         User temp_User = userRepo.findById(id).get();
         if (temp_User == null) {
             return false;
         }
-        temp_User.setName(bootcamp.getName());
-        temp_User.setAge(bootcamp.getAge());
-        temp_User.setRole(bootcamp.getRole());
-        temp_User.setEmail(bootcamp.getEmail());
-        temp_User.setUserName(bootcamp.getUserName());
+        if (!temp_User.getUserName().equals(user.getUserName())){
+            temp_User.setUserName(user.getUserName());
+        }
+        if (!temp_User.getEmail().equals(user.getEmail())){
+            temp_User.setEmail(user.getEmail());
+        }
+        temp_User.setName(user.getName());
+        temp_User.setAge(user.getAge());
+        temp_User.setRole(user.getRole());
+
+
 
         userRepo.save(temp_User);
         return true;

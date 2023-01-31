@@ -7,9 +7,11 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @RestController
@@ -21,8 +23,9 @@ public class UserController {
     public List<User> readUsers(){
         return userService.getUser();
     }
+    @ExceptionHandler(value = Exception.class)
     @PostMapping("/user")
-    public ResponseEntity createUsers(@RequestBody @Valid User bootcamp, Errors errors){
+    public ResponseEntity createUsers(@RequestBody @Valid User bootcamp, Errors errors) throws Exception  {
         if (errors.hasErrors()) {
             return ResponseEntity.status(400).body(errors.getAllErrors().get(0).getDefaultMessage());
         }
@@ -30,8 +33,30 @@ public class UserController {
             userService.addUser(bootcamp);
             return ResponseEntity.status(200).body("User added!");
 
-        }catch (DataIntegrityViolationException e){
-            return ResponseEntity.status(400).body("User name already exists");
+        }catch (HttpMessageNotReadableException e){
+            return ResponseEntity.status(400).body("Age must be a number name already exists");
+
+        }
+        catch (DataIntegrityViolationException e){
+            if(e.toString().contains("email")){
+                return ResponseEntity.status(400).body("Email already exists");
+
+            } else if(e.toString().contains("user_name")){
+                return ResponseEntity.status(400).body("User name already exists");
+            }
+            else{
+                return ResponseEntity.status(400).body("role not valid");
+            }
+
+
+
+
+
+        }
+
+
+        catch (Exception e){
+            return ResponseEntity.status(400).body("Something went wrong");
 
         }
 

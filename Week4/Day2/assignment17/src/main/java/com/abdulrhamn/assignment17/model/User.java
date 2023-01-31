@@ -1,10 +1,12 @@
 package com.abdulrhamn.assignment17.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.NumberFormat;
 
 @Entity
 @AllArgsConstructor
@@ -25,19 +27,23 @@ public class User {
     private String userName;
 
     @NotEmpty
-    @NotNull
-    @Pattern(regexp = "^.+@.+\\.\\w{2,}$")
+//    @NotNull
+    @Pattern(regexp = "^.+@.+\\.\\w{2,}$" , message = "must be in this form XXX@XX.XX")
     @Column(columnDefinition = "varchar(40) unique not null")
     private String email;
 
+//    @NotEmpty
     @NotEmpty
+//@NotNull
     @Size
-    @Pattern(regexp = "^admin||user$")
-//    @Column(columnDefinition = "varchar(10) check ( role ='admin' or gender ='user') not null")
+//    @Pattern(regexp = "^admin||user$")
+    @Column(columnDefinition = "varchar(10)  CHECK (role='admin' || role='user')")
     private String role;
 
+//    @Column(columnDefinition = "int check(age >0)" )
     @NotNull
-    @Column(columnDefinition = "int not null")
+    @Positive
+    @Column
     private Integer age;
 
 
