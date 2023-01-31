@@ -4,6 +4,7 @@ import com.abdulrhamn.assignment17.model.User;
 
 import com.abdulrhamn.assignment17.repository.UserRepo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -38,9 +39,13 @@ public class UserService {
         temp_User.setRole(user.getRole());
 
 
-
+    try{
         userRepo.save(temp_User);
         return true;
+
+    }catch (DataIntegrityViolationException e){
+        return false;
+    }
     }
     public boolean deleteUser(Integer id) {
         User temp_User = userRepo.getById(id);
