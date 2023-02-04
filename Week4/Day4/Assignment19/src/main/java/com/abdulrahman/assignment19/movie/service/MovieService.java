@@ -1,6 +1,7 @@
 package com.abdulrahman.assignment19.movie.service;
 
 
+import com.abdulrahman.assignment19.director.repositroy.DirectorRepo;
 import com.abdulrahman.assignment19.exception.ApiException;
 import com.abdulrahman.assignment19.movie.model.Movie;
 import com.abdulrahman.assignment19.movie.repository.MovieRepo;
@@ -15,12 +16,17 @@ import java.util.List;
 public class MovieService {
 
     final MovieRepo movieRepo;
+    final DirectorRepo directorRepo;
+
     public List<Movie> getMovie() {
          List<Movie> movies = movieRepo.findAll();
         return movies;
     }
     public void addMovie(Movie movie) {
-
+        // does director exist
+        if (directorRepo.findDirectorById(movie.getDirectorID()) == null) {
+            throw  new ApiException("Director id not found");
+        }
         movieRepo.save(movie);
     }
     public boolean editMovie(String id, Movie movie) {

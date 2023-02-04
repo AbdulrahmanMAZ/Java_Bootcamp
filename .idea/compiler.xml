@@ -7,7 +7,6 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Project_4" />
         <module name="Assignment13-Bank" />
         <module name="Assignment_18" />
         <module name="Assignment19" />
@@ -30,6 +29,7 @@
       <module name="Exersice" target="17" />
       <module name="Homework-12" target="17" />
       <module name="project_4" target="17" />
+      <module name="Project_4" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
