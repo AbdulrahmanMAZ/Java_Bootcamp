@@ -23,16 +23,22 @@ public class MovieService {
         return movies;
     }
     public void addMovie(Movie movie) {
-        // does director exist
+        // does director exist ?
         if (directorRepo.findDirectorById(movie.getDirectorID()) == null) {
             throw  new ApiException("Director id not found");
         }
-        movieRepo.save(movie);
+
+        try{
+            movieRepo.save(movie);
+
+        }catch (DataIntegrityViolationException e){
+            throw new ApiException("You have entered wrong data");
+        }
     }
-    public boolean editMovie(String id, Movie movie) {
+    public void editMovie(String id, Movie movie) {
         Movie temp_Movie = movieRepo.findById(id).get();
         if (temp_Movie == null) {
-            return false;
+            throw new ApiException("Wrong id for the movie");
         }
 
         temp_Movie.setName(movie.getName());
@@ -43,19 +49,18 @@ public class MovieService {
 
     try{
         movieRepo.save(temp_Movie);
-        return true;
 
     }catch (DataIntegrityViolationException e){
-        return false;
+        throw new ApiException("You have entered wrong data");
     }
     }
-    public boolean deleteMovie(String id) {
+    public void deleteMovie(String id) {
         Movie temp_Movie = movieRepo.getById(id);
         if (temp_Movie == null) {
-            return false;
+            throw new ApiException("You have entered wrond id");
+
         }
         movieRepo.delete(temp_Movie);
-        return true;
     }
     public Movie findMovieByTitle(String name) {
         Movie movie = movieRepo.findMovieByNameContains(name);
