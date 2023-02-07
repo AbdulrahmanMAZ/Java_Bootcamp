@@ -3,6 +3,7 @@
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/Week3/Day4/Exercise" />
+    <file type="web" url="file://$PROJECT_DIR$/Week5/Day1/Assignment21" />
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
@@ -24,6 +25,9 @@
         <option value="$PROJECT_DIR$/Week4/Day3/Assignment_18/pom.xml" />
         <option value="$PROJECT_DIR$/Week4/Day5/project_4/src/Project_4/pom.xml" />
         <option value="$PROJECT_DIR$/Week4/Day4/Assignment19/pom.xml" />
+        <option value="$PROJECT_DIR$/Week5/Day1/CustomerDTO/src/main/java/com/abdulrahman/customerdto/Customer/Exercise21/pom.xml" />
+        <option value="$PROJECT_DIR$/Week5/Day1/Exercise21/pom.xml" />
+        <option value="$PROJECT_DIR$/Week5/Day1/Assignment21/pom.xml" />
       </list>
     </option>
   </component>

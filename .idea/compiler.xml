@@ -13,7 +13,9 @@
         <module name="assignment17" />
         <module name="Homework12" />
         <module name="assignment_15" />
+        <module name="Assignment21" />
         <module name="Exercise_17" />
+        <module name="Exercise21" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -22,6 +24,7 @@
       <module name="assignment-14" target="17" />
       <module name="assignment14" target="17" />
       <module name="assignment18" target="17" />
+      <module name="CustomerDTO" target="17" />
       <module name="Ecercise17" target="17" />
       <module name="Exercise" target="17" />
       <module name="Exercise_15" target="17" />
@@ -38,9 +41,12 @@
       <module name="Assignment-13" options="-parameters" />
       <module name="Assignment13-Bank" options="-parameters" />
       <module name="Assignment19" options="-parameters" />
+      <module name="Assignment21" options="-parameters" />
       <module name="Assignment_18" options="-parameters" />
+      <module name="CustomerDTO" options="-parameters" />
       <module name="Ecercise17" options="-parameters" />
       <module name="Exercise" options="-parameters" />
+      <module name="Exercise21" options="-parameters" />
       <module name="Exercise_15" options="-parameters" />
       <module name="Exercise_17" options="-parameters" />
       <module name="Exercise_18" options="-parameters" />
