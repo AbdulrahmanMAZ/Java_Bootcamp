@@ -7,10 +7,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="Exercise22" />
         <module name="Assignment13-Bank" />
         <module name="Assignment_18" />
         <module name="Assignment19" />
         <module name="assignment17" />
+        <module name="Assignemnt22" />
         <module name="Homework12" />
         <module name="assignment_15" />
         <module name="Assignment21" />
@@ -30,6 +32,7 @@
       <module name="Exercise_15" target="17" />
       <module name="Exercise_18" target="17" />
       <module name="Exersice" target="17" />
+      <module name="ffff" target="17" />
       <module name="Homework-12" target="17" />
       <module name="project_4" target="17" />
       <module name="Project_4" target="17" />
@@ -37,6 +40,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Assignemnt22" options="-parameters" />
       <module name="Assignment" options="-parameters" />
       <module name="Assignment-13" options="-parameters" />
       <module name="Assignment13-Bank" options="-parameters" />
@@ -47,6 +51,7 @@
       <module name="Ecercise17" options="-parameters" />
       <module name="Exercise" options="-parameters" />
       <module name="Exercise21" options="-parameters" />
+      <module name="Exercise22" options="-parameters" />
       <module name="Exercise_15" options="-parameters" />
       <module name="Exercise_17" options="-parameters" />
       <module name="Exercise_18" options="-parameters" />
@@ -58,6 +63,7 @@
       <module name="assignment17" options="-parameters" />
       <module name="assignment18" options="-parameters" />
       <module name="assignment_15" options="-parameters" />
+      <module name="ffff" options="-parameters" />
       <module name="project_4" options="-parameters" />
     </option>
   </component>
