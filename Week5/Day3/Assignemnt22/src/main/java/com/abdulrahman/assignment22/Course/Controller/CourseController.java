@@ -38,12 +38,20 @@ public class CourseController {
         return ResponseEntity.status(200).body("Teacher address was deleted!");
 
     }
+
+
+
+
+    //
+    //
+
+    // ASSIGN COURSE TO A TEACHER
     @PutMapping("{course_id}/course/{teacher_id}")
     public ResponseEntity assignTeacher(@PathVariable Integer course_id, @PathVariable Integer teacher_id){
         courseService.assignCourseToTeacher(course_id,teacher_id);
         return ResponseEntity.status(200).body("course is .successfully assigned to the teacher");
     }
-
+    // GET THE TEACHER NAME OF THE COURSE
     @GetMapping("/course/{course_id}")
     public ResponseEntity returnTeacherName(@PathVariable Integer course_id){
         return ResponseEntity.status(200).body( courseService.returnTeacherName(course_id));
