@@ -12,6 +12,7 @@
         <module name="Assignment19" />
         <module name="Assignemnt22" />
         <module name="assignment_15" />
+        <module name="assignment23" />
         <module name="Exercise22" />
         <module name="assignment17 (2)" />
         <module name="assignment17 (1)" />
@@ -23,6 +24,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="Assignemnt23" target="17" />
       <module name="Assignment" target="17" />
       <module name="Assignment-13" target="17" />
       <module name="assignment-14" target="17" />
@@ -66,6 +68,7 @@
       <module name="assignment17 (1)" options="-parameters" />
       <module name="assignment17 (2)" options="-parameters" />
       <module name="assignment18" options="-parameters" />
+      <module name="assignment23" options="-parameters" />
       <module name="assignment_15" options="-parameters" />
       <module name="ffff" options="-parameters" />
       <module name="project_4" options="-parameters" />
