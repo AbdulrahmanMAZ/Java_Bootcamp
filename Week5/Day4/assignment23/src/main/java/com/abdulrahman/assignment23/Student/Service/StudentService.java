@@ -1,6 +1,8 @@
 package com.abdulrahman.assignment23.Student.Service;
 
 
+import com.abdulrahman.assignment23.Course.Model.Course;
+import com.abdulrahman.assignment23.Course.Repository.CourseRepo;
 import com.abdulrahman.assignment23.Student.Model.Student;
 import com.abdulrahman.assignment23.Student.Repository.StudentRepo;
 import com.abdulrahman.assignment23.Teacher.Model.Teacher;
@@ -10,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -17,6 +20,8 @@ import java.util.List;
 public class StudentService {
     private final StudentRepo studentRepo;
     private final TeacherRepo teacherRepo;
+    private final CourseRepo courseRepo;
+
 
     public List<Student> getStudents() {
         return studentRepo.findAll();
@@ -65,33 +70,56 @@ public class StudentService {
             throw new ApiException("No address found for the teacher");
         }
 }
-    public void assignStudentToTeacher(Integer student_id,Integer teacher_id ){
-        Student student = studentRepo.findStudentById(student_id);
-        Teacher teacher = teacherRepo.findTeacherById(teacher_id);
-        if (student == null||teacher == null) {
-            throw new ApiException("No teacher found! ");
-        }
 
-//        teacher.addStudents(student);
-        student.setTeacher(teacher);
-        studentRepo.save(student);
-        teacherRepo.save(teacher);
-
-    }
-
-    public String returnTeacherName(Integer id) {
+    public void changeMajor(Integer id,String major) {
         Student student = studentRepo.findStudentById(id);
         if (student == null) {
-            throw new ApiException("No teacher found! ");
+            throw new ApiException("No student found! ");
         }
-        if (student.getTeacher() == null) {
-            throw new ApiException("No teacher found! for that specific teacher please assign a teacher by hitting this end point: localhost:8080/api/v3/{teacher_id}/student/{student_id} ");
-        }
-        Teacher teacher = teacherRepo.findTeacherById(student.getTeacher().getId());
-        if (teacher == null) {
-            throw new ApiException("No teacher found! ");
-        }
-        return teacher.getName();
+        student.setMajor(major);
+        student.emptyCourses();
+        studentRepo.save(student);
+
     }
+    public Set<Student> getStudentsList(Integer id) {
+        Course course = courseRepo.findCourseById(id);
+        if (course == null) {
+            throw new ApiException("No teacher found! ");
+        }
+        Set<Student> students = course.getStudents();
+        if (students.isEmpty()) {
+            throw new ApiException("No students found for this course");
+        }
+        return students;
+    }
+
+//    public void assignStudentToTeacher(Integer student_id,Integer teacher_id ){
+//        Student student = studentRepo.findStudentById(student_id);
+//        Teacher teacher = teacherRepo.findTeacherById(teacher_id);
+//        if (student == null||teacher == null) {
+//            throw new ApiException("No teacher found! ");
+//        }
+//
+////        teacher.addStudents(student);
+//        student.setTeacher(teacher);
+//        studentRepo.save(student);
+//        teacherRepo.save(teacher);
+//
+//    }
+
+//    public String returnTeacherName(Integer id) {
+//        Student student = studentRepo.findStudentById(id);
+//        if (student == null) {
+//            throw new ApiException("No teacher found! ");
+//        }
+//        if (student.getTeacher() == null) {
+//            throw new ApiException("No teacher found! for that specific teacher please assign a teacher by hitting this end point: localhost:8080/api/v3/{teacher_id}/student/{student_id} ");
+//        }
+//        Teacher teacher = teacherRepo.findTeacherById(student.getTeacher().getId());
+//        if (teacher == null) {
+//            throw new ApiException("No teacher found! ");
+//        }
+//        return teacher.getName();
+//    }
 
 }

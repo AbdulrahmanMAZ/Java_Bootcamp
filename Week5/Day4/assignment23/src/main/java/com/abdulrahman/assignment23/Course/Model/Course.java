@@ -1,5 +1,6 @@
 package com.abdulrahman.assignment23.Course.Model;
 
+import com.abdulrahman.assignment23.Student.Model.Student;
 import com.abdulrahman.assignment23.Teacher.Model.Teacher;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -8,6 +9,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Set;
 
 
 @Entity
@@ -25,4 +28,16 @@ public class Course {
     @JsonIgnore
     @JoinColumn(name = "teacher_id")
     private Teacher teacher;
+
+    @ManyToMany(mappedBy = "courses")
+//    @JsonIgnore
+//    @JoinColumn(name = "teacher_id")
+//    @JoinColumn(m)
+    @JsonIgnore
+    private Set<Student> students;
+
+    public void addStudent(Student student
+    ){
+        this.students.add(student);
+    }
 }

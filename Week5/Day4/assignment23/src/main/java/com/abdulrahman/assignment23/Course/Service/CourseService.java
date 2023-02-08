@@ -4,6 +4,8 @@ package com.abdulrahman.assignment23.Course.Service;
 
 import com.abdulrahman.assignment23.Course.Model.Course;
 import com.abdulrahman.assignment23.Course.Repository.CourseRepo;
+import com.abdulrahman.assignment23.Student.Model.Student;
+import com.abdulrahman.assignment23.Student.Repository.StudentRepo;
 import com.abdulrahman.assignment23.Teacher.Model.Teacher;
 import com.abdulrahman.assignment23.Teacher.Repository.TeacherRepo;
 import com.abdulrahman.assignment23.exception.ApiException;
@@ -19,6 +21,8 @@ import java.util.Set;
 public class CourseService {
     private final CourseRepo courseRepo;
     private final TeacherRepo teacherRepo;
+
+    private final StudentRepo studentRepo;
 
     public List<Course> getCourses() {
         return courseRepo.findAll();
@@ -69,6 +73,19 @@ public class CourseService {
         course.setTeacher(teacher);
         courseRepo.save(course);
         teacherRepo.save(teacher);
+
+    }
+    public void assignStudentToCourse(Integer course_id,Integer student_id ){
+        Course course = courseRepo.findCourseById(course_id);
+        Student student = studentRepo.findStudentById(student_id);
+        if (course == null||student == null) {
+            throw new ApiException("No teacher found! ");
+        }
+
+        student.addCourse(course);
+        course.addStudent(student);
+        courseRepo.save(course);
+        studentRepo.save(student);
 
     }
 

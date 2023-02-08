@@ -40,9 +40,18 @@ public class StudentController {
     }
 
 
-    // GET TEACHER INFO BY THE ID
-    @GetMapping("/student/{id}")
-    public ResponseEntity getStudentById(@PathVariable Integer id){
-        return ResponseEntity.status(200).body(studentService.getStudentName(id));
+    //  CHANGE THE MAJOR AND DELETE ALL THE COURSES FROM THE LIST OF COURSES
+    @PutMapping("/student_id/{student_id}/new_major/{major}")
+    public ResponseEntity changeMajor(@PathVariable int student_id,@PathVariable String major){
+        studentService.changeMajor(student_id,major);
+        return ResponseEntity.status(200).body("Updated");
+    }
+
+
+
+    // LIST ALL THE STUDENTS ASSIGNED TO THE COURSE
+    @GetMapping("/students_list/{class_id}")
+    public ResponseEntity getStudentsByClassId(@PathVariable Integer class_id){
+        return ResponseEntity.status(200).body(studentService.getStudentsList(class_id));
     }
 }
