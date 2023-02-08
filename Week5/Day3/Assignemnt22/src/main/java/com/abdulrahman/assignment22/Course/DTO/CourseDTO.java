@@ -1,4 +1,4 @@
-package com.abdulrahman.assignment22.course.DTO;
+package com.abdulrahman.assignment22.Course.DTO;
 
 import lombok.Data;
 

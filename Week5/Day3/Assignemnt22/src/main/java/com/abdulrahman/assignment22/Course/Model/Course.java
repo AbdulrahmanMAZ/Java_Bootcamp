@@ -1,4 +1,4 @@
-package com.abdulrahman.assignment22.course.Model;
+package com.abdulrahman.assignment22.Course.Model;
 
 import com.abdulrahman.assignment22.Teacher.Model.Teacher;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -16,6 +16,7 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @NotNull
+    @Column(columnDefinition = "varchar(15) unique")
     private String  name;
     @ManyToOne
     @JsonIgnore

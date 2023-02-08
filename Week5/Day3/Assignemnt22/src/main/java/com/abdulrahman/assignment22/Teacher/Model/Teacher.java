@@ -1,7 +1,7 @@
 package com.abdulrahman.assignment22.Teacher.Model;
 
 
-import com.abdulrahman.assignment22.course.Model.Course;
+import com.abdulrahman.assignment22.Course.Model.Course;
 import com.abdulrahman.assignment22.TeacherAdress.Model.TeacherAddress;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
@@ -41,10 +41,12 @@ public class Teacher {
     @PrimaryKeyJoinColumn
     private TeacherAddress teacherAddress;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "teacher")
     @PrimaryKeyJoinColumn
     private Set<Course> courses;
 
-
+    public void addCourses(Course course){
+        this.courses.add(course);
+    }
 
 }
