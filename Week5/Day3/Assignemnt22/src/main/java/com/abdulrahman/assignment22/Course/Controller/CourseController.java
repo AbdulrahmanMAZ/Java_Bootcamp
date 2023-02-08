@@ -40,8 +40,6 @@ public class CourseController {
     }
 
 
-
-
     // ASSIGN COURSE TO A TEACHER
     @PutMapping("{course_id}/course/{teacher_id}")
     public ResponseEntity assignTeacher(@PathVariable Integer course_id, @PathVariable Integer teacher_id){

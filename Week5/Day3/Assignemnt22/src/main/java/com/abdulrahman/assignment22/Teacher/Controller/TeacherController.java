@@ -41,7 +41,6 @@ public class TeacherController {
     }
 
 
-
     // GET TEACHER INFO BY THE ID
     @GetMapping("/teacher/{id}")
     public Teacher getTeacherById(@PathVariable Integer id){
