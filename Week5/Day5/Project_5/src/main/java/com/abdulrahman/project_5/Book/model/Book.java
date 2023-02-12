@@ -3,6 +3,10 @@ package com.abdulrahman.project_5.Book.model;
 import com.abdulrahman.project_5.Store.model.Store;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,11 +16,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Book {
-@Id
+   @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @NotNull
+    @NotEmpty
     private String name;
+    @NotNull
+    @PositiveOrZero
     private Integer bookCount;
+    @NotNull
+    @Pattern(regexp = "^Action||Drama||Comedy||Horror||Romance||Mystery||Thriller$")
     private String genre;
     @ManyToOne
     @JsonIgnore

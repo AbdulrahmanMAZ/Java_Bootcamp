@@ -2,6 +2,8 @@ package com.abdulrahman.project_5.Store.controller;
 
 import com.abdulrahman.project_5.Book.model.Book;
 import com.abdulrahman.project_5.Customer.model.Customer;
+import com.abdulrahman.project_5.DTO.LocationDTO;
+import com.abdulrahman.project_5.Location.model.Location;
 import com.abdulrahman.project_5.Store.model.Store;
 import com.abdulrahman.project_5.Store.service.StoreService;
 import lombok.RequiredArgsConstructor;
@@ -46,7 +48,7 @@ public class StoreController {
 
     // Create endpoint that takes storeid and return all the books
     @GetMapping("/get_store_books/{store_id}")
-    public Set<Book> getBooksInStore(@PathVariable Integer store_id){
+    public List<Book> getBooksInStore(@PathVariable Integer store_id){
         return storeService.getBooksInStore(store_id);
     }
     //Create endpoint thar takes storeid and return all customers
@@ -66,6 +68,12 @@ public class StoreController {
     public ResponseEntity registerCustomerToStore(@PathVariable Integer store_id,@PathVariable Integer customer_id){
         storeService.registerCustomerToStore(store_id,customer_id);
         return ResponseEntity.status(200).body("customer is now registered");
+
+    }
+    @PostMapping("/add_location_to_store/{store_id}")
+    public ResponseEntity addLocationToStore(@PathVariable Integer store_id, @RequestBody LocationDTO location){
+        storeService.addLocationToStore(store_id,location);
+        return ResponseEntity.status(200).body("Store location updated");
 
     }
 

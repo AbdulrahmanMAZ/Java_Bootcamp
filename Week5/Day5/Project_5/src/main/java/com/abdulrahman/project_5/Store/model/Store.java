@@ -4,6 +4,8 @@ import com.abdulrahman.project_5.Book.model.Book;
 import com.abdulrahman.project_5.Customer.model.Customer;
 import com.abdulrahman.project_5.Location.model.Location;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,22 +23,25 @@ public class Store {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @NotEmpty
+    @NotNull
     private String name;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL,mappedBy = "store")
     @PrimaryKeyJoinColumn
     private Location location;
 
-    @OneToMany
-    private Set<Book> books;
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "store")
+    @PrimaryKeyJoinColumn
+    private List<Book> books;
 
-    @ManyToMany
-    @JoinTable(
+    @ManyToMany(mappedBy = "")
+    @JoinTable(name = "customers_stores",
             joinColumns = @JoinColumn(name = "store_id"),
             inverseJoinColumns = @JoinColumn(name = "customer_id")
     )
     private List<Customer> customers;
     public void addBookToStore(Book book){
-        books.add(book);
+        this.books.add(book);
     }
     public void registerCustomerToStore(Customer customer){
         customers.add(customer);
