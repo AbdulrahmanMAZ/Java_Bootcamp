@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -48,6 +49,13 @@ public class StoreService {
         }
         storeRepo.delete(temp);
 
+    }
+    public Set<Book> getBooksInStore(Integer id){
+        Store temp = storeRepo.findStoreById(id);
+        if (temp == null ) {
+            throw new ApiException("Not found");
+        }
+        return temp.getBooks();
     }
     public void addBookToStore(Integer store_id,Integer book_id){
         Store store_temp = storeRepo.findStoreById(store_id);

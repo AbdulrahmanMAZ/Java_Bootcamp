@@ -1,5 +1,6 @@
 package com.abdulrahman.project_5.Store.controller;
 
+import com.abdulrahman.project_5.Book.model.Book;
 import com.abdulrahman.project_5.Customer.model.Customer;
 import com.abdulrahman.project_5.Store.model.Store;
 import com.abdulrahman.project_5.Store.service.StoreService;
@@ -8,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/v3/")
@@ -40,6 +42,10 @@ public class StoreController {
         storeService.deleteStore(id);
         return ResponseEntity.status(200).body("Updated");
 
+    }
+    @GetMapping("/get_store_books/{store_id}")
+    public Set<Book> getBooksInStore(@PathVariable Integer store_id){
+        return storeService.getBooksInStore(store_id);
     }
     @PutMapping("{store_id}/assignbook/{book_id}")
     public ResponseEntity updateStores(@PathVariable Integer store_id,@PathVariable Integer book_id){
