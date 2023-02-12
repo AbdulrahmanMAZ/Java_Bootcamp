@@ -41,18 +41,22 @@ public class BookController {
         return ResponseEntity.status(200).body("Updated");
 
     }
+
+    // Create endpoint that takes a book name and return all book information
     @GetMapping("/get_book_info/{name}")
     public ResponseEntity updateBooks(@PathVariable String name){
        Book book = bookService.returnBookInfoByName(name);
         return ResponseEntity.status(200).body(book);
 
     }
+    // Create endpoint that takes bookId and return number of books available
     @GetMapping("/get_book_count/{id}")
     public ResponseEntity getBooksCount(@PathVariable Integer id){
         Integer book_count = bookService.returnCount(id);
         return ResponseEntity.status(200).body(book_count);
 
     }
+    // Create endpoint that return all books under a specific genre
     @GetMapping("/get_book_by_genre/{genre}")
     public ResponseEntity getBooksByGenre(@PathVariable String genre){
         List<Book> books = bookService.findByGenre(genre);

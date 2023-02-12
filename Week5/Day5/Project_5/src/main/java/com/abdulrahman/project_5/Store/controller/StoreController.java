@@ -43,10 +43,19 @@ public class StoreController {
         return ResponseEntity.status(200).body("Updated");
 
     }
+
+    // Create endpoint that takes storeid and return all the books
     @GetMapping("/get_store_books/{store_id}")
     public Set<Book> getBooksInStore(@PathVariable Integer store_id){
         return storeService.getBooksInStore(store_id);
     }
+    //Create endpoint thar takes storeid and return all customers
+    @GetMapping("/get_store_customers/{store_id}")
+    public List<Customer> getCustomersByStore(@PathVariable Integer store_id){
+        return storeService.getCustomerInStore(store_id);
+    }
+
+    // End points to add books and register customers
     @PutMapping("{store_id}/assignbook/{book_id}")
     public ResponseEntity updateStores(@PathVariable Integer store_id,@PathVariable Integer book_id){
         storeService.addBookToStore(store_id,book_id);
@@ -59,8 +68,5 @@ public class StoreController {
         return ResponseEntity.status(200).body("customer is now registered");
 
     }
-    @GetMapping("/get_store_customers/{store_id}")
-    public List<Customer> getCustomersByStore(@PathVariable Integer store_id){
-        return storeService.getCustomerInStore(store_id);
-    }
+
 }
