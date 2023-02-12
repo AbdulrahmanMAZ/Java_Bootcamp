@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
+    <excludeFromCompile>
+      <directory url="file://$PROJECT_DIR$/Week5/Day5/Project_5/src/main/resources/archetype-resources" includeSubdirectories="true" />
+    </excludeFromCompile>
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
@@ -12,8 +15,8 @@
         <module name="Assignment19" />
         <module name="Assignemnt22" />
         <module name="assignment_15" />
-        <module name="assignment23" />
         <module name="Exercise22" />
+        <module name="assignment23 (2)" />
         <module name="assignment17 (2)" />
         <module name="assignment17 (1)" />
         <module name="assignment17" />
@@ -30,7 +33,9 @@
       <module name="assignment-14" target="17" />
       <module name="assignment14" target="17" />
       <module name="assignment18" target="17" />
+      <module name="assignment23" target="17" />
       <module name="CustomerDTO" target="17" />
+      <module name="Day5" target="17" />
       <module name="Ecercise17" target="17" />
       <module name="Exercise" target="17" />
       <module name="Exercise_15" target="17" />
@@ -38,8 +43,10 @@
       <module name="Exersice" target="17" />
       <module name="ffff" target="17" />
       <module name="Homework-12" target="17" />
+      <module name="Project5" target="1.7" />
       <module name="project_4" target="17" />
       <module name="Project_4" target="17" />
+      <module name="Project_5" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -69,6 +76,8 @@
       <module name="assignment17 (2)" options="-parameters" />
       <module name="assignment18" options="-parameters" />
       <module name="assignment23" options="-parameters" />
+      <module name="assignment23 (1)" options="-parameters" />
+      <module name="assignment23 (2)" options="-parameters" />
       <module name="assignment_15" options="-parameters" />
       <module name="ffff" options="-parameters" />
       <module name="project_4" options="-parameters" />
