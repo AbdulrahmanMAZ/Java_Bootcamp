@@ -15,11 +15,14 @@
         <module name="Assignment19" />
         <module name="Assignemnt22" />
         <module name="assignment_15" />
+        <module name="assignment23" />
         <module name="Exercise22" />
         <module name="assignment23 (2)" />
         <module name="assignment17 (2)" />
+        <module name="assignment23 (1)" />
         <module name="assignment17 (1)" />
         <module name="assignment17" />
+        <module name="spring-security" />
         <module name="Homework12" />
         <module name="Assignment21" />
         <module name="Exercise_17" />
@@ -33,7 +36,6 @@
       <module name="assignment-14" target="17" />
       <module name="assignment14" target="17" />
       <module name="assignment18" target="17" />
-      <module name="assignment23" target="17" />
       <module name="CustomerDTO" target="17" />
       <module name="Day5" target="17" />
       <module name="Ecercise17" target="17" />
@@ -81,6 +83,7 @@
       <module name="assignment_15" options="-parameters" />
       <module name="ffff" options="-parameters" />
       <module name="project_4" options="-parameters" />
+      <module name="spring-security" options="-parameters" />
     </option>
   </component>
 </project>
