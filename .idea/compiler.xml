@@ -11,6 +11,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Assignment13-Bank" />
+        <module name="Blog_System" />
         <module name="Assignment_18" />
         <module name="Assignment19" />
         <module name="Assignemnt22" />
@@ -22,7 +23,6 @@
         <module name="assignment23 (1)" />
         <module name="assignment17 (1)" />
         <module name="assignment17" />
-        <module name="spring-security" />
         <module name="Homework12" />
         <module name="Assignment21" />
         <module name="Exercise_17" />
@@ -49,6 +49,7 @@
       <module name="project_4" target="17" />
       <module name="Project_4" target="17" />
       <module name="Project_5" target="17" />
+      <module name="spring-security" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -60,6 +61,7 @@
       <module name="Assignment19" options="-parameters" />
       <module name="Assignment21" options="-parameters" />
       <module name="Assignment_18" options="-parameters" />
+      <module name="Blog_System" options="-parameters" />
       <module name="CustomerDTO" options="-parameters" />
       <module name="Ecercise17" options="-parameters" />
       <module name="Exercise" options="-parameters" />

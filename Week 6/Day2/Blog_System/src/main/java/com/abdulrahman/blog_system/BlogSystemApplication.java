@@ -1,13 +1,13 @@
-package com.abdulrahman.assignment23;
+package com.abdulrahman.blog_system;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Assignment23Application {
+public class BlogSystemApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(Assignment23Application.class, args);
+        SpringApplication.run(BlogSystemApplication.class, args);
     }
 
 }
