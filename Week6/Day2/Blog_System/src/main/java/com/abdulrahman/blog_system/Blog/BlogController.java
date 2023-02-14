@@ -2,6 +2,7 @@ package com.abdulrahman.blog_system.Blog;
 
 
 import com.abdulrahman.blog_system.MyUser.MyUser;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,13 +22,13 @@ public class BlogController {
         return blogService.getBlogs(myUser);
     }
     @PostMapping
-    public ResponseEntity addBlog(@AuthenticationPrincipal MyUser myUser, @RequestBody Blog blog){
+    public ResponseEntity addBlog(@AuthenticationPrincipal MyUser myUser,@Valid @RequestBody Blog blog){
         blogService.addBlog(myUser,blog);
 
         return ResponseEntity.status(HttpStatus.OK).body("Done! ");
     }
     @PutMapping("/{blog_id}")
-    public ResponseEntity updateBlog(@AuthenticationPrincipal MyUser myUser, @RequestBody Blog blog,@PathVariable Integer blog_id){
+    public ResponseEntity updateBlog(@AuthenticationPrincipal MyUser myUser,@Valid @RequestBody Blog blog,@PathVariable Integer blog_id){
         blogService.updateBlog(myUser,blog,blog_id);
         return ResponseEntity.status(HttpStatus.OK).body("Updated! ");
     }

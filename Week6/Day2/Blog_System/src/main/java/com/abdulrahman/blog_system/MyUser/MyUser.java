@@ -2,6 +2,7 @@ package com.abdulrahman.blog_system.MyUser;
 
 import com.abdulrahman.blog_system.Blog.Blog;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -20,9 +21,12 @@ public class MyUser implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(unique = true)
     private String username;
+    @Column(nullable = false)
     private String password;
-
+    @Pattern(regexp = "^USER$",message = "Role must be user only")
+    @Column(columnDefinition = "varchar(10) not null check (role='USER')")
     private String role;
     @OneToMany(cascade = CascadeType.ALL , mappedBy = "myUser")
     private Set<Blog> blogs;
