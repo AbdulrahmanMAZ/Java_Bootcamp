@@ -15,6 +15,7 @@
         <module name="Assignment_18" />
         <module name="Assignment19" />
         <module name="Assignemnt22" />
+        <module name="Store" />
         <module name="assignment_15" />
         <module name="assignment23" />
         <module name="Exercise22" />
@@ -74,6 +75,7 @@
       <module name="Homework-12" options="-parameters" />
       <module name="Homework12" options="-parameters" />
       <module name="Project_4" options="-parameters" />
+      <module name="Store" options="-parameters" />
       <module name="assignment-14" options="-parameters" />
       <module name="assignment17" options="-parameters" />
       <module name="assignment17 (1)" options="-parameters" />
