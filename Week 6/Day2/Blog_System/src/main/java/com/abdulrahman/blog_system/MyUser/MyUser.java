@@ -3,10 +3,14 @@ package com.abdulrahman.blog_system.MyUser;
 import com.abdulrahman.blog_system.Blog.Blog;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Set;
 
 @Entity
@@ -19,13 +23,16 @@ public class MyUser implements UserDetails {
     private String username;
     private String password;
 
-    private String Role;
-    @OneToMany
+    private String role;
+    @OneToMany(cascade = CascadeType.ALL , mappedBy = "myUser")
     private Set<Blog> blogs;
 
+    public void emptyBlogs(){
+        this.blogs.clear();
+    }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return Collections.singleton(new SimpleGrantedAuthority(this.role));
     }
 
     @Override

@@ -1,6 +1,7 @@
-package com.example.springsecurity.advice;
+package com.abdulrahman.blog_system.advice;
 
-import com.example.springsecurity.exception.ApiException;
+
+import com.abdulrahman.blog_system.exception.ApiException;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;

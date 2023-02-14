@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/blog")
+@RequestMapping("/api/v1/admin/users")
 @RequiredArgsConstructor
 public class MyUserController {
     private final MyUserService myUserService;
@@ -21,19 +21,19 @@ public class MyUserController {
         return myUserService.getMyUsers();
     }
     @PostMapping
-    public ResponseEntity addMyUser(@AuthenticationPrincipal MyUser myUser, @RequestBody MyUser user){
-        myUserService.addMyUser(myUser,user);
+    public ResponseEntity addMyUser( @RequestBody MyUser user){
+        myUserService.addMyUser(user);
 
         return ResponseEntity.status(HttpStatus.OK).body("Done! ");
     }
-    @PutMapping("/{blog_id}")
-    public ResponseEntity updateMyUser(@AuthenticationPrincipal MyUser myUser, @RequestBody MyUser user,@PathVariable Integer blog_id){
-        myUserService.updateMyUser(myUser,user,blog_id);
+    @PutMapping("/{user_id}")
+    public ResponseEntity updateMyUser( @RequestBody MyUser user,@PathVariable Integer user_id){
+        myUserService.updateMyUser(user,user_id);
         return ResponseEntity.status(HttpStatus.OK).body("Updated! ");
     }
-    @DeleteMapping("/{blog_id}")
-    public ResponseEntity deleteMyUser(@AuthenticationPrincipal MyUser myUser, @PathVariable Integer user_id){
-        myUserService.deleteMyUser(myUser,user_id);
+    @DeleteMapping("/{user_id}")
+    public ResponseEntity deleteMyUser( @PathVariable Integer user_id){
+        myUserService.deleteMyUser(user_id);
 
         return ResponseEntity.status(HttpStatus.OK).body("Deleted! ");
     }

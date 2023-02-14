@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Location {
     @Id
+    @JsonIgnore
     private Integer id;
     @NotNull
     @NotEmpty

@@ -27,13 +27,23 @@ public class SecurityConfig {
         daoAuthenticationProvider.setPasswordEncoder(new BCryptPasswordEncoder());
         return daoAuthenticationProvider;
     }
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED).
-                and().
-                authenticationProvider(authenticationProvider()).
-                authorizeHttpRequests().requestMatchers(HttpMethod.POST,"/api/v1/register").permitAll().
-                requestMatchers(HttpMethod.POST,"/api/v2/login").hasAuthority("ADMIN").anyRequest().authenticated().
-                and().logout().logoutUrl("/api/v1/auth/logout/").deleteCookies("JSESSIONID").invalidateHttpSession(true).and().httpBasic();
+        http.csrf().disable()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+                .and()
+                .authenticationProvider(authenticationProvider())
+                .authorizeHttpRequests()
+                .requestMatchers(HttpMethod.POST,"/api/v1/auth/register").permitAll()
+                .requestMatchers("/api/v1/admin/**").hasAuthority("ADMIN")
+                .anyRequest().authenticated()
+                .and()
+                .logout().logoutUrl("/api/v1/auth/logout")
+                .deleteCookies("JSESSIONID")
+                .invalidateHttpSession(true)
+                .and()
+                .httpBasic();
         return http.build();
     }
 

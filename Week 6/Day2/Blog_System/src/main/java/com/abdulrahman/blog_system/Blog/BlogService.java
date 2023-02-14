@@ -14,8 +14,8 @@ public class BlogService {
     private final BlogRepo blogRepo;
 
 
-    public List<Blog> getBlogs() {
-        return null;
+    public List<Blog> getBlogs(MyUser myUser) {
+        return blogRepo.findAllByMyUser_Id(myUser.getId());
     }
 
     public void addBlog(MyUser myUser, Blog blog) {
@@ -61,6 +61,39 @@ public class BlogService {
         }
 
         blogRepo.delete(blog_temp);
+    }
+
+    public Blog getBlogById(MyUser myUser,Integer blog_id) {
+        Blog blog_temp = blogRepo.findBlogById(blog_id);
+
+        if (blog_temp == null) {
+            throw new ApiException("not found");
+        }
+        MyUser myUser_temp = blog_temp.getMyUser();
+        if (myUser_temp == null) {
+            throw new ApiException("not found");
+        }
+
+        if (myUser_temp.getId() != myUser.getId()) {
+            throw new ApiException("You are not authorized to delete this blog");
+        }
+        return blog_temp;
+    }
+    public Blog getBlogByTitle(MyUser myUser,String blog_title) {
+        Blog blog_temp = blogRepo.findBlogByTitle(blog_title);
+        if (blog_temp == null) {
+            throw new ApiException("not found");
+        }
+        MyUser myUser_temp = blog_temp.getMyUser();
+        if (myUser_temp == null) {
+            throw new ApiException("not found");
+        }
+
+        if (myUser_temp.getId() != myUser.getId()) {
+            throw new ApiException("You are not authorized to delete this blog");
+        }
+
+        return blog_temp;
     }
 
 }

@@ -17,8 +17,8 @@ public class BlogController {
     private final BlogService blogService;
 
     @GetMapping
-    public List<Blog> getBlogs(){
-        return blogService.getBlogs();
+    public List<Blog> getBlogs(@AuthenticationPrincipal MyUser myUser){
+        return blogService.getBlogs(myUser);
     }
     @PostMapping
     public ResponseEntity addBlog(@AuthenticationPrincipal MyUser myUser, @RequestBody Blog blog){
@@ -36,5 +36,15 @@ public class BlogController {
         blogService.deleteBlog(myUser,blog_id);
 
         return ResponseEntity.status(HttpStatus.OK).body("Deleted! ");
+    }
+
+    @GetMapping("/id/{blog_id}")
+    public Blog getBlogById(@AuthenticationPrincipal MyUser myUser,@PathVariable Integer blog_id){
+        return blogService.getBlogById(myUser,blog_id);
+    }
+
+    @GetMapping("/title/{blog_title}")
+    public Blog getBlogByTitle(@AuthenticationPrincipal MyUser myUser,@PathVariable String blog_title){
+        return blogService.getBlogByTitle(myUser,blog_title);
     }
 }

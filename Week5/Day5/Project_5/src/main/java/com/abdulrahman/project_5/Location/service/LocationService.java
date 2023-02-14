@@ -36,6 +36,10 @@ public class LocationService {
         if (temp == null) {
             throw new ApiException("Not found");
         }
+        Location teacherAddress = teacherAddressRepo.findTeacherAddressById(id);
+        if (teacherAddress == null) {
+            throw new ApiException("No address found for the teacher");
+        }
         locationRepo.delete(temp);
 
     }
