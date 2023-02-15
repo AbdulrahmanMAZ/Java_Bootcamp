@@ -1,6 +1,6 @@
 package com.abdulrahman.store.MyUser;
 
-import com.abdulrahman.store.Orderr.Orderr;
+import com.abdulrahman.store.Order.Order;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
@@ -24,11 +24,11 @@ public class MyUser implements UserDetails {
     @Column(nullable = false)
     private String password;
     @Pattern(regexp = "^USER$",message = "Role must be user only")
-    @Column(columnDefinition = "varchar(10) not null check (role='USER')")
+    @Column(columnDefinition = "varchar(10) not null check (role='USER' || role='ADMIN' )")
     private String role;
     @OneToMany(cascade = CascadeType.ALL , mappedBy = "myUser")
     @PrimaryKeyJoinColumn
-    private Set<Orderr> userOrders;
+    private Set<Order> userOrders;
 
     public void emptyBlogs(){
         this.userOrders.clear();

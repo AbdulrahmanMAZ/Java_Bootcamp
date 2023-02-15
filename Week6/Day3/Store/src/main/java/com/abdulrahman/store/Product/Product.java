@@ -1,6 +1,6 @@
 package com.abdulrahman.store.Product;
 
-import com.abdulrahman.store.Orderr.Orderr;
+import com.abdulrahman.store.Order.Order;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -22,11 +22,8 @@ public class Product {
     @NotNull
     private Integer price;
 
-    @ManyToMany
+    @ManyToOne
     @JsonIgnore
-    @JoinTable(name = "product_orders",
-            joinColumns = @JoinColumn(name = "product_id") ,
-            inverseJoinColumns = @JoinColumn(name = "order_id") )
-    private Set<Orderr> userOrders;
+    private Order userOrder;
 
 }

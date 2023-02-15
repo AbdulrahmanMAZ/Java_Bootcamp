@@ -1,10 +1,12 @@
 package com.abdulrahman.store.MyUser;
 
 
+import com.abdulrahman.store.Order.Order;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,4 +38,10 @@ public class MyUserController {
 
         return ResponseEntity.status(HttpStatus.OK).body("Deleted! ");
     }
+    // Get customer by ID
+    @GetMapping("/{user_id}")
+    public MyUser getMyUserById(@PathVariable Integer user_id){
+        return myUserService.getMyUserById(user_id);
+    }
+
 }

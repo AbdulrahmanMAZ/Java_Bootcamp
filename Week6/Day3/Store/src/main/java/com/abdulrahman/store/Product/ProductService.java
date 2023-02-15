@@ -58,7 +58,17 @@ public class ProductService {
 
         productRepo.delete(product_temp);
     }
+    // Get product by ID
+    public Product getProductById( Integer productId) {
 
+        Product product_temp = productRepo.findProductById(productId);
+        if (product_temp == null) {
+            throw new ApiException("Product not found");
+        }
+
+        return product_temp;
+
+    }
 //    public Blog getPById(MyUser myUser,Integer blog_id) {
 //        Product blog_temp = productRepo.findProductById(blog_id);
 //

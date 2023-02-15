@@ -1,7 +1,7 @@
 package com.abdulrahman.store.MyUser;
 
-import com.abdulrahman.store.Orderr.Orderr;
-import com.abdulrahman.store.Orderr.OrderRepo;
+import com.abdulrahman.store.Order.Order;
+import com.abdulrahman.store.Order.OrderRepo;
 import com.abdulrahman.store.exception.ApiException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -46,12 +46,25 @@ public class MyUserService {
         if (user == null) {
             throw new ApiException("You are not authorized to delete this blog");
         }
-        List<Orderr> user_Orderrs = orderRepo.findAllByMyUser_Id(user_id);
-        for (Orderr userOrder : user_Orderrs) {
+        List<Order> user_Orders = orderRepo.findAllByMyUser_Id(user_id);
+        for (Order userOrder : user_Orders) {
             orderRepo.delete(userOrder);
         }
 
         myUserRepo.delete(user);
     }
+
+    // Get customer by ID
+    public MyUser getMyUserById( Integer userId) {
+
+            MyUser user_temp = myUserRepo.findMyUserById(userId);
+            if (user_temp == null) {
+                throw new ApiException("User not found");
+            }
+
+            return user_temp;
+
+    }
+
 
 }

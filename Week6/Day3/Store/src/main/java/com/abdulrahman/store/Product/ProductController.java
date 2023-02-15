@@ -38,6 +38,11 @@ public class ProductController {
 
         return ResponseEntity.status(HttpStatus.OK).body("Deleted! ");
     }
+    // Get product by ID
+    @GetMapping("/{product_id}")
+    public Product getProductById(@PathVariable Integer product_id){
+        return productService.getProductById(product_id);
+    }
 //
 //    @GetMapping("/id/{product_id}")
 //    public Product getProductById(@AuthenticationPrincipal MyUser myUser,@PathVariable Integer product_id){

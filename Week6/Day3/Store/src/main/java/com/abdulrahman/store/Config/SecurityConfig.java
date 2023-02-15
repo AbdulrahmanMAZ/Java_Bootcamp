@@ -36,6 +36,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests()
                 .requestMatchers(HttpMethod.POST,"/api/v1/auth/register").permitAll()
                 .requestMatchers("/api/v1/admin/**").hasAuthority("ADMIN")
+                .requestMatchers("/api/v1/order/admin/**").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .logout().logoutUrl("/api/v1/auth/logout")

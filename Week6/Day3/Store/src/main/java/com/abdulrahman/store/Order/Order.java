@@ -1,4 +1,4 @@
-package com.abdulrahman.store.Orderr;
+package com.abdulrahman.store.Order;
 
 
 
@@ -9,34 +9,42 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
 @Data
-public class Orderr {
+@Table(name = "Orders")
+public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @NotNull
-
     private Integer quantity;
-    @NotNull
-    private Integer totalPrice;
 
-    private LocalDateTime date_received;
+    private Integer totalPrice;
+    @CreationTimestamp
+    private Timestamp date_created;
+    private LocalDateTime date_received = LocalDateTime.now().plusDays(5);
 
     @Pattern(regexp = "^new||inProgress||completed$")
     private String status;
+
     @ManyToOne
     @JsonIgnore
-    @JoinColumn(name = "user_id",referencedColumnName = "id")
+    @JoinColumn(name = "user_id")
     private MyUser myUser;
 
-    @ManyToMany(mappedBy = "userOrders")
+    @OneToMany(mappedBy = "userOrder")
     @JsonIgnore
     private Set<Product> products;
 
+    public void addProdct(Product product){
+        this.products.add(product);
+    }
 }
