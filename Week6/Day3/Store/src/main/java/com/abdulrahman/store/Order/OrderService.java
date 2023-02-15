@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -87,7 +88,9 @@ public class OrderService {
             throw new ApiException("not found");
         }
         userOrder_temp.setStatus(newStatus);
-
+        if(newStatus.equals("completed")){
+            userOrder_temp.setDate_received(LocalDateTime.now());
+        }
         orderRepo.save(userOrder_temp);
     }
 
