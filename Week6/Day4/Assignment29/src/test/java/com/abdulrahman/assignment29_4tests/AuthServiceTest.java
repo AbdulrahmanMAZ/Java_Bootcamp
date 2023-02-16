@@ -23,13 +23,10 @@ public class AuthServiceTest {
 
     @InjectMocks
     AuthService authService;
-    @Mock
-    TodoRepository todoRepository;
+
     @Mock
     AuthRepository authRepository;
 
-    @Mock
-    Todo todo;
 
     MyUser user;
 

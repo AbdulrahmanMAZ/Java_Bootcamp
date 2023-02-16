@@ -20,6 +20,8 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.util.List;
 
+import static org.mockito.Mockito.when;
+
 @ExtendWith(MockitoExtension.class)
 public class AuthControllerTest {
 
@@ -27,23 +29,7 @@ public class AuthControllerTest {
     AuthController authController;
     @Mock
     AuthService authService;
-    @Mock
-    AuthRepository authRepository;
 
-    @Mock
-    Todo todo;
-
-    MyUser user;
-
-    Todo todo1,todo2,todo3;
-
-    List<Todo> todos;
-
-//    @BeforeEach
-//    void setUp() {
-//        user=new MyUser(null,"Abdulrahman","12345","USER", null);
-//
-//    }
 
 
     @Test
@@ -53,16 +39,13 @@ public class AuthControllerTest {
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
         MyUser myUser = new MyUser();
         myUser.setId(1);
-//        when(authRepository.save(any(MyUser.class))).thenReturn(user);
         MyUser user=new MyUser(null,"Abdulrahman","12345","USER", null);
         ResponseEntity<Response> responseEntity = authController.register(user);
         Assertions.assertThat(responseEntity.getStatusCode().value()).isEqualTo(201);
         Response response = new Response("User registered !",201);
         Assertions.assertThat(responseEntity.getBody()).isEqualTo(response);
 
-//        assertThat(responseEntity).isEqualTo(201);
-//        assertThat(responseEntity.getHeaders().getLocation().getPath()).isEqualTo("/1");
-    }
+}
 
 
 

@@ -24,16 +24,13 @@ import static org.mockito.Mockito.*;
 public class MyUserDetailsServiceTest {
 
 
-    TodoService todoService;
-    @Mock
-    TodoRepository todoRepository;
+
     @Mock
     AuthRepository authRepository;
     @InjectMocks
     MyUserDetailsService myUserDetailsService;
 
-    @Mock
-    Todo todo;
+
 
     MyUser user;
 
