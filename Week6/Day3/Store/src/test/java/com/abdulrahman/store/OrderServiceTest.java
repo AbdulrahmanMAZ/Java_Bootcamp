@@ -7,7 +7,7 @@ import com.abdulrahman.store.Order.OrderRepo;
 import com.abdulrahman.store.Order.OrderService;
 import com.abdulrahman.store.Product.Product;
 import org.aspectj.weaver.ast.Or;
-import org.junit.jupiter.api.Assertions;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -30,8 +30,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-@DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+
 public class OrderServiceTest {
 
 
@@ -70,15 +69,46 @@ public class OrderServiceTest {
         when(orderRepo.findAll()).thenReturn(orders);
         List<Order> orders1 =  orderService.getMyOrders();
         System.out.println(orders.size());
-        Assertions.assertEquals(orders1.size(),orders.size());
+        Assertions.assertThat(orders1).isEqualTo(orders);
 
     }
 
+//
 //    @Test
-//    public void findTodoById(){
-//        orderRepo.save(order1);
-//        Order order=orderRepo.findOrderById(order1.getId());
-//        Assertions.assertThat(order).isEqualTo(order1);
+//    public void getTodoByIdTest(){
+//        when(authRepository.findMyUserById(user.getId())).thenReturn(user);
+//        when(todoRepository.findAllByMyUser(user)).thenReturn(todos);
+//
+//
+//        List<Todo> todo = todoService.getTodo(user.getId());
+//        Assertions.assertEquals(todo,todos);
+//        verify(authRepository,times(1)).findMyUserById(user.getId());
+//        verify(todoRepository,times(1)).findAllByMyUser(user);
+//
+//    }
+//
+//    @Test
+//    public void AddTodoTest(){
+//
+//        when(authRepository.findMyUserById(user.getId())).thenReturn(user);
+//
+//        todoService.addTodo(user.getId(),todo3);
+//        verify(authRepository,times(1)).findMyUserById(user.getId());
+//        verify(todoRepository,times(1)).save(todo3);
+//    }
+//
+//    @Test
+//    public void updateTodoTest(){
+//
+//        when(todoRepository.findTodoById(todo1.getId())).thenReturn(todo1);
+//        when(authRepository.findMyUserById(user.getId())).thenReturn(user);
+//
+//        todoService.updateTodo(todo1.getId(),todo2,user.getId());
+//
+//        verify(todoRepository,times(1)).findTodoById(todo1.getId());
+//        verify(authRepository,times(1)).findMyUserById(user.getId());
+//        verify(todoRepository,times(1)).save(todo1);
+//
 //    }
 
 

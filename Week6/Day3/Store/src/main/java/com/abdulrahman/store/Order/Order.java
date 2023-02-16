@@ -49,7 +49,7 @@ public class Order {
     private Set<Product> products;
 
 
-    public void addProdct(Product product){
+    public void addProduct(Product product){
         this.products.add(product);
     }
 }

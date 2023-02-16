@@ -20,6 +20,7 @@
         <module name="assignment23" />
         <module name="Exercise22" />
         <module name="assignment23 (2)" />
+        <module name="assignment29" />
         <module name="assignment17 (2)" />
         <module name="assignment23 (1)" />
         <module name="assignment17 (1)" />
@@ -50,7 +51,6 @@
       <module name="project_4" target="17" />
       <module name="Project_4" target="17" />
       <module name="Project_5" target="17" />
-      <module name="spring-security" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -84,10 +84,10 @@
       <module name="assignment23" options="-parameters" />
       <module name="assignment23 (1)" options="-parameters" />
       <module name="assignment23 (2)" options="-parameters" />
+      <module name="assignment29" options="-parameters" />
       <module name="assignment_15" options="-parameters" />
       <module name="ffff" options="-parameters" />
       <module name="project_4" options="-parameters" />
-      <module name="spring-security" options="-parameters" />
     </option>
   </component>
 </project>
