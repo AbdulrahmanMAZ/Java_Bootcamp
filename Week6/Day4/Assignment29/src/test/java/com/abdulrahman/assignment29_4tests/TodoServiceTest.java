@@ -29,8 +29,6 @@ public class TodoServiceTest {
     @Mock
     AuthRepository authRepository;
 
-    @Mock
-    Todo todo;
 
     MyUser user;
 
@@ -63,9 +61,7 @@ public class TodoServiceTest {
     @Test
     public void getTodoByIdTest(){
         when(authRepository.findMyUserById(user.getId())).thenReturn(user);
-
         when(todoRepository.findAllByMyUser(user)).thenReturn(todos);
-
 
         List<Todo> todoList = todoService.getTodoById(user.getId());
         Assertions.assertEquals(todoList,todos);
@@ -78,7 +74,6 @@ public class TodoServiceTest {
     public void AddTodoTest(){
 
         when(authRepository.findMyUserById(user.getId())).thenReturn(user);
-
         todoService.addTodo(user.getId(),todo3);
         verify(authRepository,times(1)).findMyUserById(user.getId());
         verify(todoRepository,times(1)).save(todo3);
@@ -88,17 +83,21 @@ public class TodoServiceTest {
     public void updateTodoTest(){
 
         when(todoRepository.findTodoById(todo1.getId())).thenReturn(todo1);
-//        when(todo.getMyUser()).thenReturn(user);
-
         todoService.updateTodo(user.getId(),todo1.getId(),todo2);
-
         verify(todoRepository,times(1)).findTodoById(todo1.getId());
-//        verify(authRepository,times(1)).findMyUserById(user.getId());
         verify(todoRepository,times(1)).save(todo1);
 
     }
 
+    @Test
+    public void deleteTodoTest(){
 
+        when(todoRepository.findTodoById(todo1.getId())).thenReturn(todo1);
+        todoService.removeTodo(user.getId(),todo1.getId());
+        verify(todoRepository,times(1)).findTodoById(todo1.getId());
+        verify(todoRepository,times(1)).delete(todo1);
+
+    }
 
 
 

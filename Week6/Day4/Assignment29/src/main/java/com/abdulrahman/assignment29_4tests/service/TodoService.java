@@ -34,13 +34,19 @@ public class TodoService {
     }
 
     public void removeTodo(Integer userId, Integer todoId) {
-        Todo todo=todoRepository.findById(todoId).get();
-
+        Todo todo=todoRepository.findTodoById(todoId);
+        MyUser myUser = todo.getMyUser();
+        if (myUser == null) {
+            throw new ApiException("Does not have owner");
+        }
+        if(todo.getMyUser().getId() != userId || todo == null){
+            throw new ApiException("Bad request");
+        }
         if(todo.getMyUser().getId() !=userId){
             throw new ApiException("Bad request");
         }
 
-        todoRepository.deleteById(todoId);
+        todoRepository.delete(todo);
     }
     public void updateTodo(Integer userId, Integer todoId,Todo todos) {
         Todo todo = todoRepository.findTodoById(todoId);
