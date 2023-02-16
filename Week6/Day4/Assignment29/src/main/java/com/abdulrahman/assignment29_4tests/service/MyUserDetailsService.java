@@ -1,7 +1,7 @@
-package com.example.springsecurity.service;
+package com.abdulrahman.assignment29_4tests.service;
 
-import com.example.springsecurity.model.MyUser;
-import com.example.springsecurity.repository.AuthRepository;
+import com.abdulrahman.assignment29_4tests.repository.AuthRepository;
+import com.abdulrahman.assignment29_4tests.model.MyUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

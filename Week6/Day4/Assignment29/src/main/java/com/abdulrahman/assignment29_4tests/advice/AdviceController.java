@@ -1,6 +1,6 @@
-package com.example.springsecurity.advice;
+package com.abdulrahman.assignment29_4tests.advice;
 
-import com.example.springsecurity.exception.ApiException;
+import com.abdulrahman.assignment29_4tests.exception.ApiException;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;

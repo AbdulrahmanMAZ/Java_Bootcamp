@@ -1,15 +1,13 @@
-package com.example.springsecurity.contoller;
+package com.abdulrahman.assignment29_4tests.contoller;
 
 
-import com.example.springsecurity.dto.Response;
-import com.example.springsecurity.model.MyUser;
-import com.example.springsecurity.service. AuthService;
+import com.abdulrahman.assignment29_4tests.dto.Response;
+import com.abdulrahman.assignment29_4tests.model.MyUser;
+import com.abdulrahman.assignment29_4tests.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RequestMapping("/api/v1/auth")
 @RestController

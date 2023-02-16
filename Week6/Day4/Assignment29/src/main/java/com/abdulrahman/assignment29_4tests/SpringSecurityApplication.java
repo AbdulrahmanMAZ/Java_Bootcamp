@@ -1,4 +1,4 @@
-package com.example.springsecurity;
+package com.abdulrahman.assignment29_4tests;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

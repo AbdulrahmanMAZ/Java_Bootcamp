@@ -1,7 +1,7 @@
-package com.example.springsecurity.config;
+package com.abdulrahman.assignment29_4tests.config;
 
 
-import com.example.springsecurity.service.MyUserDetailsService;
+import com.abdulrahman.assignment29_4tests.service.MyUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,10 +11,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-
-import java.security.Security;
 
 @Configuration
 @EnableWebSecurity

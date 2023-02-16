@@ -1,4 +1,4 @@
-package com.example.springsecurity.exception;
+package com.abdulrahman.assignment29_4tests.exception;
 
 public class ApiException extends RuntimeException {
     public ApiException(String message) {

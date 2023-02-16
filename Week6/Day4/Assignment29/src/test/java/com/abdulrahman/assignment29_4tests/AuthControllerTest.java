@@ -1,15 +1,13 @@
-package com.example.springsecurity;
+package com.abdulrahman.assignment29_4tests;
 
 
-import com.example.springsecurity.contoller.AuthController;
-import com.example.springsecurity.dto.Response;
-import com.example.springsecurity.model.MyUser;
-import com.example.springsecurity.model.Todo;
-import com.example.springsecurity.repository.AuthRepository;
-import com.example.springsecurity.repository.TodoRepository;
-import com.example.springsecurity.service.AuthService;
+import com.abdulrahman.assignment29_4tests.dto.Response;
+import com.abdulrahman.assignment29_4tests.contoller.AuthController;
+import com.abdulrahman.assignment29_4tests.model.MyUser;
+import com.abdulrahman.assignment29_4tests.model.Todo;
+import com.abdulrahman.assignment29_4tests.repository.AuthRepository;
+import com.abdulrahman.assignment29_4tests.service.AuthService;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -20,11 +18,7 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import static org.assertj.core.api.ClassBasedNavigableIterableAssert.assertThat;
-import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class AuthControllerTest {

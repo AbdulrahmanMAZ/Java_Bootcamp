@@ -1,7 +1,7 @@
-package com.example.springsecurity.repository;
+package com.abdulrahman.assignment29_4tests.repository;
 
-import com.example.springsecurity.model.MyUser;
-import com.example.springsecurity.model.Todo;
+import com.abdulrahman.assignment29_4tests.model.MyUser;
+import com.abdulrahman.assignment29_4tests.model.Todo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

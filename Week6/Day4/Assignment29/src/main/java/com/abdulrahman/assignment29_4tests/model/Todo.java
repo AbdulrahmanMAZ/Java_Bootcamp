@@ -1,4 +1,4 @@
-package com.example.springsecurity.model;
+package com.abdulrahman.assignment29_4tests.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;

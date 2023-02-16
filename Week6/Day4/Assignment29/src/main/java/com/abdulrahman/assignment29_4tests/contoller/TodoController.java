@@ -1,11 +1,10 @@
-package com.example.springsecurity.contoller;
+package com.abdulrahman.assignment29_4tests.contoller;
 
-import com.example.springsecurity.dto.Response;
-import com.example.springsecurity.model.MyUser;
-import com.example.springsecurity.model.Todo;
-import com.example.springsecurity.service.TodoService;
+import com.abdulrahman.assignment29_4tests.dto.Response;
+import com.abdulrahman.assignment29_4tests.model.MyUser;
+import com.abdulrahman.assignment29_4tests.model.Todo;
+import com.abdulrahman.assignment29_4tests.service.TodoService;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;

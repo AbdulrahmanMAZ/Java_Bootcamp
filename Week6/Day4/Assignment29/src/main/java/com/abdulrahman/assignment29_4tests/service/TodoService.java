@@ -1,13 +1,12 @@
-package com.example.springsecurity.service;
+package com.abdulrahman.assignment29_4tests.service;
 
 
-import com.example.springsecurity.exception.ApiException;
-import com.example.springsecurity.model.MyUser;
-import com.example.springsecurity.model.Todo;
-import com.example.springsecurity.repository.AuthRepository;
-import com.example.springsecurity.repository.TodoRepository;
+import com.abdulrahman.assignment29_4tests.exception.ApiException;
+import com.abdulrahman.assignment29_4tests.repository.AuthRepository;
+import com.abdulrahman.assignment29_4tests.repository.TodoRepository;
+import com.abdulrahman.assignment29_4tests.model.MyUser;
+import com.abdulrahman.assignment29_4tests.model.Todo;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
