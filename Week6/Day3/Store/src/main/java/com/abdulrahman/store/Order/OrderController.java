@@ -19,7 +19,7 @@ public class OrderController {
     // Get all customer orders
     @GetMapping
     public List<Order> getOrders(@AuthenticationPrincipal MyUser myUser){
-        return orderService.getMyOrders(myUser);
+        return orderService.getMyOrders();
     }
     @PostMapping("/{product_id}")
     public ResponseEntity addOrder(@AuthenticationPrincipal MyUser myUserr, @Valid @RequestBody Order userOrder,@PathVariable Integer product_id){

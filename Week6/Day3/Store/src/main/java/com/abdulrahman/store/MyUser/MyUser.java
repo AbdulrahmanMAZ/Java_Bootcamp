@@ -3,7 +3,9 @@ package com.abdulrahman.store.MyUser;
 import com.abdulrahman.store.Order.Order;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Pattern;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,7 +16,8 @@ import java.util.Set;
 
 @Entity
 @Data
-
+@AllArgsConstructor
+@NoArgsConstructor
 public class MyUser implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

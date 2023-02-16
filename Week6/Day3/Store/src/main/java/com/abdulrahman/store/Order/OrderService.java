@@ -18,8 +18,8 @@ public class OrderService {
     private final ProductRepo productRepo;
 
     // Get all customer orders
-    public List<Order> getMyOrders(MyUser myUser) {
-        return orderRepo.findAllByMyUser_Id(myUser.getId());
+    public List<Order> getMyOrders() {
+        return orderRepo.findAll();
     }
 
     // In Add order endpoint: calculate the total price , status by defalut new
