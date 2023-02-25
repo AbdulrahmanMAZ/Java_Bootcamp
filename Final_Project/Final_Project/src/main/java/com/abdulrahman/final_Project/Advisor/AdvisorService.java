@@ -164,6 +164,9 @@ public class AdvisorService {
         if (advisor == null) {
             throw new ApiException("Start up Not found");
         }
+        if (!appointment.getStatus().equals("Pending")) {
+            throw new ApiException("This appointment is not pending anymore");
+        }
 
         appointment.setFee(advisor.getFeePerHour());
         appointment.setStatus("Accepted");
