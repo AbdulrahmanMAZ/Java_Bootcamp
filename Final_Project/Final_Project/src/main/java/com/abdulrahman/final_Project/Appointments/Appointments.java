@@ -27,10 +27,12 @@ public class Appointments {
     private LocalDateTime dateTime;
 
     @NotNull
-    @Pattern(regexp = "^Pending||Accepted||Compeleted$")
+    @Pattern(regexp = "^Pending||Accepted||Unpaid||Paid||Rejected||Completed$")
     private String status;
-    @ManyToOne
 
+    @PositiveOrZero
+    private Integer Fee=0;
+    @ManyToOne
     @JoinColumn(name = "advisor_id")
     private Advisor advisor;
     @ManyToOne

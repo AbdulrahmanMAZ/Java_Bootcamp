@@ -25,8 +25,11 @@ public class Feedback {
     @NotEmpty
     private String name;
     @NotNull
-    @PositiveOrZero
-    private Integer bookCount;
+    @NotEmpty
+    private String instructions;
+//    @NotNull
+//    @PositiveOrZero
+//    private Integer bookCount;
 //    @NotNull
 //    @Pattern(regexp = "^Action||Drama||Comedy||Horror||Romance||Mystery||Thriller$")
 //    private String genre;

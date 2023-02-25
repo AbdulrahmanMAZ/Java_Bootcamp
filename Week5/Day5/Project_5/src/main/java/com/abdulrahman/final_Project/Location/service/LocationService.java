@@ -31,17 +31,17 @@ public class LocationService {
         locationRepo.save(temp);
 
     }
-    public void deleteLocation(Integer id){
-        Location temp = locationRepo.findLocationById(id);
-        if (temp == null) {
-            throw new ApiException("Not found");
-        }
-        Location teacherAddress = teacherAddressRepo.findTeacherAddressById(id);
-        if (teacherAddress == null) {
-            throw new ApiException("No address found for the teacher");
-        }
-        locationRepo.delete(temp);
-
-    }
+//    public void deleteLocation(Integer id){
+//        Location temp = locationRepo.findLocationById(id);
+//        if (temp == null) {
+//            throw new ApiException("Not found");
+//        }
+//        Location teacherAddress = teacherAddressRepo.findTeacherAddressById(id);
+//        if (teacherAddress == null) {
+//            throw new ApiException("No address found for the teacher");
+//        }
+//        locationRepo.delete(temp);
+//
+//    }
 
 }

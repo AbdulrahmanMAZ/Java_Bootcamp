@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -33,6 +34,10 @@ public class Advisor {
         @NotEmpty
         @NotNull
         private String speciality;
+        @PositiveOrZero
+        private Integer FeePerHour;
+        @PositiveOrZero
+        private Integer Wallet;
         @OneToMany(cascade = CascadeType.ALL,mappedBy = "advisor")
         @PrimaryKeyJoinColumn
         @JsonIgnore
@@ -59,6 +64,12 @@ public class Advisor {
             appointments.add(appointment);
         }
 
+        public void addMoneyToWallet(Integer fee){
+                this.Wallet += fee;
+        }
+        public void refund(Integer fee){
+                this.Wallet -= fee;
+        }
 
     }
 

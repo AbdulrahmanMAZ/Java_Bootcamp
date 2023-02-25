@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -41,6 +42,10 @@ public class AdvisorDetails {
     @Column(columnDefinition = "varchar(40) unique not null")
     private String email;
 
+
+
+    @PositiveOrZero
+    private Integer Wallet=0;
     @OneToOne
     @MapsId
     @JsonIgnore

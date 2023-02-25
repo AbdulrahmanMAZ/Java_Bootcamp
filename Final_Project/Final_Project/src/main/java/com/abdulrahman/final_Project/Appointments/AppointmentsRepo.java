@@ -15,8 +15,8 @@ public interface AppointmentsRepo extends JpaRepository<Appointments,Integer> {
     Appointments findAppointmentByDateTimeAndStartUp_Id(LocalDateTime name,Integer advisor_id);
     Appointments findAppointmentsByIdAndAdvisor_IdAndStartUp_Id(Integer id,Integer advisorID, Integer startUpID);
 //    Appointments findAppointmentByDateTime(String name);
-    List<Appointments> findAllByStartUp(StartUp startUp);
-    List<Appointments> findAllByAdvisor(Advisor advisor);
+    List<Appointments> findAllByStartUpAndStatus(StartUp startUp,String status);
+    List<Appointments> findAllByAdvisorAndStatus(Advisor advisor,String status);
 
     List<Appointments> findAllByDateTime(String genre);
 

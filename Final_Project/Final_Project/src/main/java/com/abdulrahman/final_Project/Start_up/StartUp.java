@@ -10,6 +10,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -38,7 +39,8 @@ public class StartUp
     @PrimaryKeyJoinColumn
     @JsonIgnore
     private List<Appointments> appointments;
-
+    @PositiveOrZero
+    private Integer Wallet;
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "startUp")
     @PrimaryKeyJoinColumn
     private List<Review> review;
@@ -57,5 +59,10 @@ public class StartUp
         appointments.add(appointment);
     }
 
-
+    public void addMoneyToWallet(Integer fee){
+        this.Wallet += fee;
+    }
+    public void withdrawMoneyFromWallet(Integer fee){
+        this.Wallet -= fee;
+    }
 }

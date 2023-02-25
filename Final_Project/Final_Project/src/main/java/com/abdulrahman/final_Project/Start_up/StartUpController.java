@@ -51,6 +51,12 @@ public class StartUpController {
         return ResponseEntity.status(200).body("Your appointment has been Updated");
 
     }
+    @GetMapping("/pending_appointment/{startUp_ID}")
+    public ResponseEntity getPendingAppointment(@PathVariable Integer startUp_ID){
+        List<Appointments> appointments = startUpService.pendingAppointments(startUp_ID);
+        return ResponseEntity.status(200).body(appointments);
+
+    }
     @DeleteMapping("/cancel_appointment/{appointmentID}/{startUp_ID}/{advisor_ID}")
     public ResponseEntity rescheduleAppointment(@PathVariable Integer appointmentID,@PathVariable Integer startUp_ID, @PathVariable Integer advisor_ID){
         startUpService.cancelAppointment(appointmentID,startUp_ID,advisor_ID);

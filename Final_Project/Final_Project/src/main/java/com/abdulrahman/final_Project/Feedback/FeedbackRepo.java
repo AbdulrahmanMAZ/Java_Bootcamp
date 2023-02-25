@@ -7,8 +7,8 @@ import java.util.List;
 
 @Repository
 public interface FeedbackRepo extends JpaRepository<Feedback,Integer> {
-    Feedback findBookById(Integer id);
-    Feedback findBookByName(String name);
+    Feedback findFeedbackById(Integer id);
+    Feedback findFeedbackByName(String name);
 
 
 

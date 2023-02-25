@@ -1,7 +1,11 @@
 package com.abdulrahman.final_Project.Advisor;
 
+import com.abdulrahman.final_Project.AdvisorDetails.AdvisorDetails;
 import com.abdulrahman.final_Project.Appointments.Appointments;
 import com.abdulrahman.final_Project.Appointments.AppointmentsRepo;
+import com.abdulrahman.final_Project.Feedback.Feedback;
+import com.abdulrahman.final_Project.Feedback.FeedbackRepo;
+import com.abdulrahman.final_Project.Feedback.FeedbackService;
 import com.abdulrahman.final_Project.Start_up.StartUp;
 import com.abdulrahman.final_Project.Start_up.StartUpRepo;
 import com.abdulrahman.final_Project.exception.ApiException;
@@ -20,6 +24,8 @@ public class AdvisorService {
     final private MyTimeService myTimeService;
 
     final private StartUpRepo startUpRepo;
+    final private FeedbackService feedbackService;
+    final private FeedbackRepo feedbackRepo;
 
 
 
@@ -68,7 +74,7 @@ public class AdvisorService {
         Appointments check_advisor_availability = appointmentsRepo.findAppointmentByDateTimeAndAdvisor_Id(appointmentStartTime,advisor_id);
         Appointments check_startUp_availability = appointmentsRepo.findAppointmentByDateTimeAndStartUp_Id(appointmentStartTime,startUp_id);
         if (check_advisor_availability == null && check_startUp_availability == null) {
-            appointment = new Appointments(null,appointmentStartTime,"Pending",null,null,null);
+            appointment = new Appointments(null,appointmentStartTime,"Pending",0,null,null,null);
         } else if (check_advisor_availability != null) {
             throw new ApiException("This advisor is not available at this time, please try another date");
         } else if (check_startUp_availability != null){
@@ -91,27 +97,93 @@ public class AdvisorService {
             throw new ApiException("Appointment Not found");
         }
 
+        Advisor advisor = advisorRepo.findAdvisorById(advisor_id);
+        if (advisor == null) {
+            throw new ApiException("Advisor Not found");
+        }
+        StartUp startUp = startUpRepo.findStartUpById(startUp_id);
+        if (advisor == null) {
+            throw new ApiException("Start up Not found");
+        }
+
+
+        if (appointment.getStatus().equals("Paid")) {
+            advisor.refund(appointment.getFee());
+            startUp.addMoneyToWallet(appointment.getFee());
+            advisorRepo.save(advisor);
+            startUpRepo.save(startUp);
+
+        }
+
         appointmentsRepo.delete(appointment);
     }
-    public List<Appointments> upComingAppointments( Integer advisor_id){
+    public List<Appointments> pendingAppointments( Integer advisor_id){
         Advisor advisor = advisorRepo.findAdvisorById(advisor_id);
         if (advisor == null) {
             throw new ApiException("Start up Not found");
         }
-        List<Appointments> appointments = appointmentsRepo.findAllByAdvisor(advisor);
+        List<Appointments> appointments = appointmentsRepo.findAllByAdvisorAndStatus(advisor,"Pending");
         if (appointments.isEmpty()) {
             throw new ApiException("You have no upcoming appointments");
         }
         return appointments;
 
     }
-    public void CompleteAppointments( Integer appointment_id, Integer startUp_id, Integer advisor_id){
+    public List<Appointments> upComingAppointments( Integer advisor_id){
+        Advisor advisor = advisorRepo.findAdvisorById(advisor_id);
+        if (advisor == null) {
+            throw new ApiException("Start up Not found");
+        }
+        List<Appointments> appointments = appointmentsRepo.findAllByAdvisorAndStatus(advisor,"Accepted");
+        if (appointments.isEmpty()) {
+            throw new ApiException("You have no upcoming appointments");
+        }
+        return appointments;
+
+    }
+    public void CompleteAppointmentAndWriteFeedback(Integer appointment_id, Integer startUp_id, Integer advisor_id, Feedback feedback){
         Appointments appointment = appointmentsRepo.findAppointmentsByIdAndAdvisor_IdAndStartUp_Id(appointment_id,advisor_id,startUp_id);
         if (appointment == null) {
             throw new ApiException("Appointment Not found");
         }
+        feedback.setAppointment(appointment);
+        feedbackService.addFeedback(feedback);
 
-        appointmentsRepo.delete(appointment);
+        appointment.setStatus("Completed");
+//        appointment.setFeedback(feedback);
+        appointmentsRepo.save(appointment);
 
     }
+
+    public void AcceptAppointment(Integer appointment_id, Integer startUp_id, Integer advisor_id){
+        Appointments appointment = appointmentsRepo.findAppointmentsByIdAndAdvisor_IdAndStartUp_Id(appointment_id,advisor_id,startUp_id);
+        if (appointment == null) {
+            throw new ApiException("Appointment Not found");
+        }
+        Advisor advisor = advisorRepo.findAdvisorById(advisor_id);
+        if (advisor == null) {
+            throw new ApiException("Start up Not found");
+        }
+
+
+        appointment.setFee(advisor.getFeePerHour());
+        appointment.setStatus("Accepted");
+        appointmentsRepo.save(appointment);
+
+    }
+
+//    public void RejectAppointment(Integer appointment_id, Integer startUp_id, Integer advisor_id){
+//        Appointments appointment = appointmentsRepo.findAppointmentsByIdAndAdvisor_IdAndStartUp_Id(appointment_id,advisor_id,startUp_id);
+//        if (appointment == null) {
+//            throw new ApiException("Appointment Not found");
+//        }
+//        Advisor advisor = advisorRepo.findAdvisorById(advisor_id);
+//        if (advisor == null) {
+//            throw new ApiException("Start up Not found");
+//        }
+//
+//        appointment.setStatus("Rejected");
+//        appointmentsRepo.save(appointment);
+//
+//    }
 }

@@ -11,26 +11,25 @@ import java.util.List;
 public class FeedbackService {
     final private FeedbackRepo feedbackRepo;
 
-    public List<Feedback> getBooks(){
+    public List<Feedback> getFeedbacks(){
         return feedbackRepo.findAll();
     }
-    public void addBook(Feedback feedback){
+    public void addFeedback(Feedback feedback){
         feedbackRepo.save(feedback);
 
     }
-    public void editBook(Integer id, Feedback feedback){
-        Feedback temp = feedbackRepo.findBookById(id);
+    public void editFeedback(Integer id, Feedback feedback){
+        Feedback temp = feedbackRepo.findFeedbackById(id);
         if (temp == null) {
             throw new ApiException("Not found");
         }
-        temp.setBookCount(feedback.getBookCount());
         temp.setName(feedback.getName());
 
         feedbackRepo.save(temp);
 
     }
-    public void deleteBook(Integer id){
-        Feedback temp = feedbackRepo.findBookById(id);
+    public void deleteFeedback(Integer id){
+        Feedback temp = feedbackRepo.findFeedbackById(id);
         if (temp == null) {
             throw new ApiException("Not found");
         }
@@ -39,15 +38,15 @@ public class FeedbackService {
     }
 
 //    public Integer returnCount(Integer id){
-//        Feedback temp = feedbackRepo.findBookById(id);
+//        Feedback temp = feedbackRepo.findFeedbackById(id);
 //        if (temp == null) {
 //            throw new ApiException("Not found");
 //        }
-//        return temp.getBookCount();
+//        return temp.getFeedbackCount();
 //
 //    }
-//    public Feedback returnBookInfoByName(String name){
-//        Feedback temp = feedbackRepo.findBookByName(name);
+//    public Feedback returnFeedbackInfoByName(String name){
+//        Feedback temp = feedbackRepo.findFeedbackByName(name);
 //        if (temp == null) {
 //            throw new ApiException("Not found");
 //        }
