@@ -1,6 +1,8 @@
 package com.abdulrahman.final_Project.Start_up;
 
 import com.abdulrahman.final_Project.Appointments.Appointments;
+import com.abdulrahman.final_Project.Feedback.Feedback;
+import com.abdulrahman.final_Project.Review.Review;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -79,6 +81,12 @@ public class StartUpController {
     public ResponseEntity CreditMoney(@PathVariable Integer startUp_ID, @PathVariable Integer amount){
         startUpService.CreditMoneyToWallet(startUp_ID,amount);
         return ResponseEntity.status(200).body("Your Wallet has ben charged with:" + amount+"$");
+
+    }
+    @PutMapping("/post_review/{appointmentID}/{startUp_ID}/{advisor_ID}")
+    public ResponseEntity PostReview(@PathVariable Integer appointmentID,@PathVariable Integer startUp_ID, @PathVariable Integer advisor_ID, @RequestBody Review review){
+        startUpService.postReview(appointmentID,startUp_ID,advisor_ID,review);
+        return ResponseEntity.status(200).body("This appointment has been reviewed");
 
     }
 

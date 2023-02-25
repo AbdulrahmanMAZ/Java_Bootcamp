@@ -8,13 +8,12 @@ import com.abdulrahman.final_Project.StartUpDetails.StartUpDetails;
 import com.abdulrahman.final_Project.Start_up.StartUp;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Data
@@ -39,6 +38,12 @@ public class Advisor {
         private Integer feePerHour;
         @PositiveOrZero
         private Integer Wallet=0;
+
+        @NotNull
+        @Min(1)
+        @Max(5)
+        @Digits(integer = 1,fraction = 1)
+        private BigDecimal rating=new BigDecimal(1);
         @OneToMany(cascade = CascadeType.ALL,mappedBy = "advisor")
         @PrimaryKeyJoinColumn
         @JsonIgnore

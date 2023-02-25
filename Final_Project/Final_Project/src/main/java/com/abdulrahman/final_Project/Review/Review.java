@@ -1,5 +1,6 @@
 package com.abdulrahman.final_Project.Review;
 import com.abdulrahman.final_Project.Advisor.Advisor;
+import com.abdulrahman.final_Project.Appointments.Appointments;
 import com.abdulrahman.final_Project.Start_up.StartUp;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -36,6 +37,12 @@ public class Review {
      @JsonIgnore
      @JoinColumn(name = "advisor_id")
      private Advisor advisor;
+
+     @OneToOne
+     @MapsId
+     @JsonIgnore
+     private Appointments appointment;
+
 
 
 

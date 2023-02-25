@@ -5,6 +5,10 @@ import com.abdulrahman.final_Project.Advisor.AdvisorRepo;
 import com.abdulrahman.final_Project.Appointments.Appointments;
 import com.abdulrahman.final_Project.Appointments.AppointmentsRepo;
 import com.abdulrahman.final_Project.Appointments.AppointmentsService;
+import com.abdulrahman.final_Project.Feedback.Feedback;
+import com.abdulrahman.final_Project.Review.Review;
+import com.abdulrahman.final_Project.Review.ReviewRepo;
+import com.abdulrahman.final_Project.Review.ReviewService;
 import com.abdulrahman.final_Project.exception.ApiException;
 import com.abdulrahman.final_Project.helper.MyTimeService;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -29,6 +34,9 @@ public class StartUpService {
     Logger logger = LoggerFactory.getLogger(StartUpService.class);
     final private AppointmentsRepo appointmentsRepo;
     final private AppointmentsService appointmentsService;
+
+    final private ReviewRepo reviewRepo;
+    final private ReviewService reviewService;
 
     public List<StartUp> getStartUps(){
         return startUpRepo.findAll();
@@ -85,14 +93,14 @@ public class StartUpService {
 //        Appointments check_startUp_availability_same = appointmentsRepo.findAppointmentByDateTimeAndStartUp_IdAndStatus(appointmentStartTime,startUp_id,"Accepted");
 
         if (check_advisor_availability == null && check_startUp_availability == null) {
-            appointment = new Appointments(null,appointmentStartTime,"Pending",0,null,null,null);
+            appointment = new Appointments(null,appointmentStartTime,"Pending",0,false,null,null,null);
             Advisor_available = true;
         } else if (check_advisor_availability != null) {
             throw new ApiException("This advisor is not available at this time, please try another date");
-        } else if (check_startUp_availability != null){
+        } else if (check_startUp_availability != null&&!check_startUp_availability.getStatus().equals("Completed")){
             throw new ApiException("You already has a date at this specific time, please try another date");
         }else {
-            throw new ApiException("This time is not valid, please try another date");
+            throw new ApiException("This time is not valid, or in the past,  please try another date");
         }
         // Before booking make sure the time is a full hour
         if (!myTimeService.validTime(hours_minutes)){
@@ -131,7 +139,7 @@ public class StartUpService {
         Appointments check_advisor_availability = appointmentsRepo.findAppointmentByDateTimeAndAdvisor_Id(appointmentNewTime,advisor_id);
         Appointments check_startUp_availability = appointmentsRepo.findAppointmentByDateTimeAndStartUp_Id(appointmentNewTime,startUp_id);
         if (check_advisor_availability == null && check_startUp_availability == null) {
-            appointment = new Appointments(null,appointmentNewTime,"Pending",0,null,null,null);
+            appointment = new Appointments(null,appointmentNewTime,"Pending",0,false,null,null,null);
         } else if (check_advisor_availability != null) {
             throw new ApiException("This advisor is not available at this time, please try another date");
         } else if (check_startUp_availability != null){
@@ -242,7 +250,52 @@ public class StartUpService {
         startUp.addMoneyToWallet(money);
         startUpRepo.save(startUp);
     }
+    public void postReview(Integer appointment_id, Integer startUp_id, Integer advisor_id, Review review){
+        Appointments appointment = appointmentsRepo.findAppointmentsByIdAndAdvisor_IdAndStartUp_Id(appointment_id,advisor_id,startUp_id);
+        if (appointment == null) {
+            throw new ApiException("Appointment Not found");
+        }
 
+        // Check if the appointment is completed
+        if (!appointment.getStatus().equals("Completed")) {
+            throw new ApiException("This appointment need to be completed before review");
+        }
+        // Check if the appointment has been already reviewed.
+        if (appointment.isReviewed()) {
+            throw new ApiException("This appointment is already been reviewed by you");
+        }
+        Advisor advisor = advisorRepo.findAdvisorById(advisor_id);
+        if (advisor == null) {
+            throw new ApiException("Advisor Not found");
+        }
+        StartUp startUp = startUpRepo.findStartUpById(startUp_id);
+        if (startUp == null) {
+            throw new ApiException("Start up Not found");
+        }
+
+
+        // Post review
+        review.setAppointment(appointment);
+        review.setStartUp(startUp);
+        review.setAdvisor(advisor);
+
+        reviewService.addReview(review);
+        reviewRepo.save(review);
+        appointment.setReviewed(true);
+        appointmentsRepo.save(appointment);
+        // calculate rating
+
+        double totalRating = 0;
+        Integer numberOfReviews = 0;
+        List<Review> reviews = reviewRepo.findAllByAdvisor_Id(advisor_id);
+        for (Review review1: reviews) {
+            totalRating += review1.getRating();
+            numberOfReviews++;
+        }
+        advisor.setRating(new BigDecimal(totalRating /numberOfReviews) );
+
+        advisorRepo.save(advisor);
+    }
 
 
 }

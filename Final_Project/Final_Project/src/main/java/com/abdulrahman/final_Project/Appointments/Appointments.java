@@ -30,8 +30,11 @@ public class Appointments {
     @Pattern(regexp = "^Pending||Accepted||Unpaid||Paid||Rejected||Completed$")
     private String status;
 
+
     @PositiveOrZero
     private Integer Fee=0;
+
+    private boolean reviewed;
     @ManyToOne
     @JoinColumn(name = "advisor_id")
     private Advisor advisor;

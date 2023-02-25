@@ -74,7 +74,7 @@ public class AdvisorService {
         Appointments check_advisor_availability = appointmentsRepo.findAppointmentByDateTimeAndAdvisor_Id(appointmentStartTime,advisor_id);
         Appointments check_startUp_availability = appointmentsRepo.findAppointmentByDateTimeAndStartUp_Id(appointmentStartTime,startUp_id);
         if (check_advisor_availability == null && check_startUp_availability == null) {
-            appointment = new Appointments(null,appointmentStartTime,"Pending",0,null,null,null);
+            appointment = new Appointments(null,appointmentStartTime,"Pending",0,false,null,null,null);
         } else if (check_advisor_availability != null) {
             throw new ApiException("This advisor is not available at this time, please try another date");
         } else if (check_startUp_availability != null){
