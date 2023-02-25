@@ -40,7 +40,7 @@ public class StartUp
     @JsonIgnore
     private List<Appointments> appointments;
     @PositiveOrZero
-    private Integer Wallet;
+    private Integer Wallet=0;
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "startUp")
     @PrimaryKeyJoinColumn
     private List<Review> review;

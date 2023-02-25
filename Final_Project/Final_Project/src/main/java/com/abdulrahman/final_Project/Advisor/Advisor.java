@@ -34,10 +34,11 @@ public class Advisor {
         @NotEmpty
         @NotNull
         private String speciality;
+        @NotNull
         @PositiveOrZero
-        private Integer FeePerHour;
+        private Integer feePerHour;
         @PositiveOrZero
-        private Integer Wallet;
+        private Integer Wallet=0;
         @OneToMany(cascade = CascadeType.ALL,mappedBy = "advisor")
         @PrimaryKeyJoinColumn
         @JsonIgnore

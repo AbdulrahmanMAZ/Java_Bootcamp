@@ -2,6 +2,7 @@ package com.abdulrahman.final_Project.Advisor;
 
 import com.abdulrahman.final_Project.Appointments.Appointments;
 import com.abdulrahman.final_Project.Feedback.Feedback;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,13 +24,13 @@ public class AdvisorController {
     }
     @PostMapping("/add_advisor")
 
-    public ResponseEntity addAdvisor( @RequestBody Advisor _advisor){
+    public ResponseEntity addAdvisor(@Valid @RequestBody Advisor _advisor){
                 advisorService.addAdvisor(_advisor);
                 return ResponseEntity.status(200).body("Success");
 
     }
     @PutMapping("/edit_advisor/{id}")
-    public ResponseEntity updateAdvisors(@PathVariable Integer id, @RequestBody Advisor _advisor){
+    public ResponseEntity updateAdvisors(@PathVariable Integer id,@Valid  @RequestBody Advisor _advisor){
         advisorService.editAdvisor(id,_advisor);
         return ResponseEntity.status(200).body("Updated");
 

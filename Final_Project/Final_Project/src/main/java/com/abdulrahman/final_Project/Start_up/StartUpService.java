@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -78,9 +79,11 @@ public class StartUpService {
         boolean Advisor_available = false;
         boolean startUp_available = false;
         Appointments appointment;
-        // check if the appointment is available
-        Appointments check_advisor_availability = appointmentsRepo.findAppointmentByDateTimeAndAdvisor_Id(appointmentStartTime,advisor_id);
+        // check if the appointment is available by checking if any advisor / start up has an accepted appointment at the same time
+        Appointments check_advisor_availability = appointmentsRepo.findAppointmentByDateTimeAndAdvisor_IdAndStatus(appointmentStartTime,advisor_id,"Accepted");
         Appointments check_startUp_availability = appointmentsRepo.findAppointmentByDateTimeAndStartUp_Id(appointmentStartTime,startUp_id);
+//        Appointments check_startUp_availability_same = appointmentsRepo.findAppointmentByDateTimeAndStartUp_IdAndStatus(appointmentStartTime,startUp_id,"Accepted");
+
         if (check_advisor_availability == null && check_startUp_availability == null) {
             appointment = new Appointments(null,appointmentStartTime,"Pending",0,null,null,null);
             Advisor_available = true;
@@ -111,21 +114,24 @@ public class StartUpService {
         if (appointments == null) {
             throw new ApiException("Appointment Not found");
         }
+        if (!appointments.equals("Pending") || !appointments.equals("Accepted")) {
+            throw new ApiException("Appointment date can not be reschedule");
+        }
 
         // Parse the string into a valid date format then store the date in a variable
-        LocalDateTime appointmentStartTime = LocalDateTime.parse(newTime);
+        LocalDateTime appointmentNewTime = LocalDateTime.parse(newTime);
         // Create a string containing the time format 00:00
-        int hours = appointmentStartTime.getHour();
-        int minutes = appointmentStartTime.getMinute();
+        int hours = appointmentNewTime.getHour();
+        int minutes = appointmentNewTime.getMinute();
         String hours_minutes = hours+":"+minutes;
 
 
         Appointments appointment;
-        // check if the appointment is available
-        Appointments check_advisor_availability = appointmentsRepo.findAppointmentByDateTimeAndAdvisor_Id(appointmentStartTime,advisor_id);
-        Appointments check_startUp_availability = appointmentsRepo.findAppointmentByDateTimeAndStartUp_Id(appointmentStartTime,startUp_id);
+        // check if the new appointment is available
+        Appointments check_advisor_availability = appointmentsRepo.findAppointmentByDateTimeAndAdvisor_Id(appointmentNewTime,advisor_id);
+        Appointments check_startUp_availability = appointmentsRepo.findAppointmentByDateTimeAndStartUp_Id(appointmentNewTime,startUp_id);
         if (check_advisor_availability == null && check_startUp_availability == null) {
-            appointment = new Appointments(null,appointmentStartTime,"Pending",0,null,null,null);
+            appointment = new Appointments(null,appointmentNewTime,"Pending",0,null,null,null);
         } else if (check_advisor_availability != null) {
             throw new ApiException("This advisor is not available at this time, please try another date");
         } else if (check_startUp_availability != null){
@@ -139,13 +145,37 @@ public class StartUpService {
         }
 
 
-        appointment.setDateTime(appointmentStartTime);
+        appointment.setDateTime(appointmentNewTime);
         appointmentsRepo.save(appointment);
     }
     public void cancelAppointment(Integer appointment_id, Integer startUp_id, Integer advisor_id){
         Appointments appointment = appointmentsRepo.findAppointmentsByIdAndAdvisor_IdAndStartUp_Id(appointment_id,advisor_id,startUp_id);
         if (appointment == null) {
             throw new ApiException("Appointment Not found");
+        }
+
+        Advisor advisor = advisorRepo.findAdvisorById(advisor_id);
+        if (advisor == null) {
+            throw new ApiException("Advisor Not found");
+        }
+        StartUp startUp = startUpRepo.findStartUpById(startUp_id);
+        if (advisor == null) {
+            throw new ApiException("Start up Not found");
+        }
+
+        // check if the current time is before the appointment date by two days.
+        LocalDateTime current =  LocalDateTime.now();
+        if (!current.plusDays(2).isBefore(appointment.getDateTime()) && appointment.getStatus().equals("Paid")){
+            throw new ApiException("You can not cancel this appointment ,you cna only cancel appointments before two days (48 hours)");
+        }
+
+
+        if (appointment.getStatus().equals("Paid")) {
+            advisor.refund(appointment.getFee());
+            startUp.addMoneyToWallet(appointment.getFee());
+            advisorRepo.save(advisor);
+            startUpRepo.save(startUp);
+
         }
 
         appointmentsRepo.delete(appointment);
@@ -198,6 +228,19 @@ public class StartUpService {
         advisorRepo.save(advisor);
         startUpRepo.save(startUp);
         appointmentsRepo.save(appointment);
+    }
+
+    public void CreditMoneyToWallet(Integer startUp_id, Integer money){
+        if (money <= 0) {
+            throw new ApiException("You must credit more than zero");
+        }
+        StartUp startUp = startUpRepo.findStartUpById(startUp_id);
+        if (startUp == null) {
+            throw new ApiException("Start up Does not exist");
+        }
+
+        startUp.addMoneyToWallet(money);
+        startUpRepo.save(startUp);
     }
 
 

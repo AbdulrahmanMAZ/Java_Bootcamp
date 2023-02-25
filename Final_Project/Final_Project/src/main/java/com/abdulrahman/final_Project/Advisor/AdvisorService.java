@@ -165,10 +165,15 @@ public class AdvisorService {
             throw new ApiException("Start up Not found");
         }
 
-
         appointment.setFee(advisor.getFeePerHour());
         appointment.setStatus("Accepted");
+        // find the pending one and delete them.
+        List<Appointments> pendingAppointments = appointmentsRepo.findAllByDateTimeAndStatus(appointment.getDateTime(),"Pending");
+//        for (Appointments pending: pendingAppointments) {
+//            appointmentsRepo.delete(pending);
+//        }
         appointmentsRepo.save(appointment);
+        appointmentsRepo.deleteAllByDateTimeAndAdvisor_IdAndStatus(appointment.getDateTime(),advisor_id,"Pending");
 
     }
 

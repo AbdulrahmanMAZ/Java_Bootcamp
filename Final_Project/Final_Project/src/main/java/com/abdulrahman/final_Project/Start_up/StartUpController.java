@@ -69,4 +69,17 @@ public class StartUpController {
         return ResponseEntity.status(200).body(appointments);
 
     }
+    @PutMapping("/pay_appointment_fee/{appointmentID}/{startUp_ID}/{advisor_ID}")
+    public ResponseEntity PayAppointmentFee(@PathVariable Integer appointmentID,@PathVariable Integer startUp_ID, @PathVariable Integer advisor_ID){
+        startUpService.payAppointmentFee(appointmentID,startUp_ID,advisor_ID);
+        return ResponseEntity.status(200).body("Your payment was successful, and the appointment has been Confirmed");
+
+    }
+    @PutMapping("/credit_money/{startUp_ID}/{amount}")
+    public ResponseEntity CreditMoney(@PathVariable Integer startUp_ID, @PathVariable Integer amount){
+        startUpService.CreditMoneyToWallet(startUp_ID,amount);
+        return ResponseEntity.status(200).body("Your Wallet has ben charged with:" + amount+"$");
+
+    }
+
 }
