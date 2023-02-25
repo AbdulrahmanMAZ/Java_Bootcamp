@@ -10,6 +10,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="Appointment" />
         <module name="Assignment13-Bank" />
         <module name="Blog_System" />
         <module name="Assignment_18" />
@@ -18,6 +19,7 @@
         <module name="Store" />
         <module name="assignment_15" />
         <module name="assignment23" />
+        <module name="assignment23 (3)" />
         <module name="Exercise22" />
         <module name="assignment23 (2)" />
         <module name="assignment29" />
@@ -55,6 +57,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Appointment" options="-parameters" />
       <module name="Assignemnt22" options="-parameters" />
       <module name="Assignment" options="-parameters" />
       <module name="Assignment-13" options="-parameters" />
@@ -84,6 +87,7 @@
       <module name="assignment23" options="-parameters" />
       <module name="assignment23 (1)" options="-parameters" />
       <module name="assignment23 (2)" options="-parameters" />
+      <module name="assignment23 (3)" options="-parameters" />
       <module name="assignment29" options="-parameters" />
       <module name="assignment_15" options="-parameters" />
       <module name="ffff" options="-parameters" />
