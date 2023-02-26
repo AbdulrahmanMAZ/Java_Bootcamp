@@ -21,7 +21,6 @@
         <module name="assignment23" />
         <module name="assignment23 (3)" />
         <module name="Exercise22" />
-        <module name="assignment23 (2)" />
         <module name="assignment29" />
         <module name="assignment17 (2)" />
         <module name="assignment23 (1)" />
@@ -40,6 +39,7 @@
       <module name="assignment-14" target="17" />
       <module name="assignment14" target="17" />
       <module name="assignment18" target="17" />
+      <module name="assignment23 (4)" target="17" />
       <module name="CustomerDTO" target="17" />
       <module name="Day5" target="17" />
       <module name="Ecercise17" target="17" />
@@ -88,6 +88,7 @@
       <module name="assignment23 (1)" options="-parameters" />
       <module name="assignment23 (2)" options="-parameters" />
       <module name="assignment23 (3)" options="-parameters" />
+      <module name="assignment23 (4)" options="-parameters" />
       <module name="assignment29" options="-parameters" />
       <module name="assignment_15" options="-parameters" />
       <module name="ffff" options="-parameters" />

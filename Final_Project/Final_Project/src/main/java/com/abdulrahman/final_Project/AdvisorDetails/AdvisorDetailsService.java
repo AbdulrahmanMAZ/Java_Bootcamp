@@ -28,7 +28,7 @@ public class AdvisorDetailsService {
 
     }
     public void editStore(Integer id, AdvisorDetails store){
-        AdvisorDetails temp = advisorDetailsRepo.findStoreById(id);
+        AdvisorDetails temp = advisorDetailsRepo.findAdvisorDetailsById(id);
         if (temp == null) {
             throw new ApiException("Not found");
         }
@@ -43,7 +43,7 @@ public class AdvisorDetailsService {
 
     }
     public void deleteStore(Integer id){
-        AdvisorDetails temp = advisorDetailsRepo.findStoreById(id);
+        AdvisorDetails temp = advisorDetailsRepo.findAdvisorDetailsById(id);
         if (temp == null) {
             throw new ApiException("Not found");
         }

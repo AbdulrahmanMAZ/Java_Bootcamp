@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AdvisorDetailsRepo extends JpaRepository<AdvisorDetails,Integer> {
-    AdvisorDetails findStoreById(Integer id);
+    AdvisorDetails findAdvisorDetailsById(Integer id);
 
 }

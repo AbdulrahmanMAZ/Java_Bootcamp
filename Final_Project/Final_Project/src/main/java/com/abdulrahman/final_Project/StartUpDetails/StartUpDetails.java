@@ -19,10 +19,9 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 
-
 public class StartUpDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
 
@@ -46,6 +45,7 @@ public class StartUpDetails {
     @OneToOne
     @MapsId
     @JsonIgnore
+    @JoinColumn(name = "id")
     private StartUp startUp;
 
 

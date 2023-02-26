@@ -30,7 +30,7 @@ public class StartUpDetailsService {
 
     }
     public void editStartUpDetails(Integer id, StartUpDetails store){
-        StartUpDetails temp = startUpDetailsRepo.findStoreById(id);
+        StartUpDetails temp = startUpDetailsRepo.findStartUpDetailsById(id);
         if (temp == null) {
             throw new ApiException("Not found");
         }
@@ -43,7 +43,7 @@ public class StartUpDetailsService {
 
     }
     public void deleteStartUpDetails(Integer id){
-        StartUpDetails temp = startUpDetailsRepo.findStoreById(id);
+        StartUpDetails temp = startUpDetailsRepo.findStartUpDetailsById(id);
         if (temp == null) {
             throw new ApiException("Not found");
         }

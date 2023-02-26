@@ -2,6 +2,7 @@ package com.abdulrahman.final_Project.advice;
 
 import com.abdulrahman.final_Project.exception.ApiException;
 import jakarta.validation.ConstraintViolationException;
+import org.hibernate.tool.schema.spi.CommandAcceptanceException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -23,6 +24,11 @@ public class AdviceController {
         String message = e.getMessage();
         return ResponseEntity.status(400).body(message);
     }
+//    @ExceptionHandler(value = CommandAcceptanceException.class)
+//    public ResponseEntity ApiException(CommandAcceptanceException e) {
+//        String message = e.getMessage();
+//        return ResponseEntity.status(400).body("Tried to deleted non exist relation");
+//    }
     @ExceptionHandler(value = DateTimeParseException.class)
     public ResponseEntity ApiException(DateTimeParseException e) {
         String message = "Enter a valid date and time like this: 2020/40/40 9:00";

@@ -3,6 +3,7 @@ package com.abdulrahman.final_Project.Advisor;
 import com.abdulrahman.final_Project.AdvisorDetails.AdvisorDetails;
 import com.abdulrahman.final_Project.Appointments.Appointments;
 import com.abdulrahman.final_Project.Feedback.Feedback;
+import com.abdulrahman.final_Project.MyUser.MyUser;
 import com.abdulrahman.final_Project.Review.Review;
 import com.abdulrahman.final_Project.StartUpDetails.StartUpDetails;
 import com.abdulrahman.final_Project.Start_up.StartUp;
@@ -23,7 +24,7 @@ import java.util.List;
 public class Advisor {
 
         @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @GeneratedValue(strategy = GenerationType.AUTO)
         private Integer id;
 
         @NotEmpty
@@ -39,15 +40,29 @@ public class Advisor {
         @PositiveOrZero
         private Integer Wallet=0;
 
-        @NotNull
+
         @Min(1)
         @Max(5)
         @Digits(integer = 1,fraction = 1)
         private BigDecimal rating=new BigDecimal(1);
+
+
+        @OneToOne
+        @MapsId
+        @JsonIgnore
+        @JoinColumn(name = "id")
+        private MyUser user;
+
+
+
+
         @OneToMany(cascade = CascadeType.ALL,mappedBy = "advisor")
         @PrimaryKeyJoinColumn
         @JsonIgnore
         private List<Appointments> appointments;
+
+
+
         @OneToOne(cascade = CascadeType.ALL,mappedBy = "advisor")
         @PrimaryKeyJoinColumn
         private AdvisorDetails details;

@@ -1,7 +1,9 @@
 package com.abdulrahman.final_Project.Start_up;
 
+import com.abdulrahman.final_Project.Advisor.Advisor;
 import com.abdulrahman.final_Project.Appointments.Appointments;
 import com.abdulrahman.final_Project.Feedback.Feedback;
+import com.abdulrahman.final_Project.MyUser.MyUser;
 import com.abdulrahman.final_Project.Review.Review;
 import com.abdulrahman.final_Project.StartUpDetails.StartUpDetails;
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -24,7 +26,7 @@ import java.util.List;
 public class StartUp
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @NotEmpty
@@ -54,6 +56,12 @@ public class StartUp
 //    @JsonIgnore
 //    private List<Store> stores;
 
+
+    @OneToOne
+    @MapsId
+    @JsonIgnore
+    @JoinColumn(name = "id")
+    private MyUser user;
 
     public void addAppointmentToMyAppointments(Appointments appointment){
         appointments.add(appointment);
