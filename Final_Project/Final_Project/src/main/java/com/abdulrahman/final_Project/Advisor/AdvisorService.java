@@ -6,6 +6,7 @@ import com.abdulrahman.final_Project.Appointments.AppointmentsRepo;
 import com.abdulrahman.final_Project.Feedback.Feedback;
 import com.abdulrahman.final_Project.Feedback.FeedbackRepo;
 import com.abdulrahman.final_Project.Feedback.FeedbackService;
+import com.abdulrahman.final_Project.MyUser.MyUser;
 import com.abdulrahman.final_Project.Start_up.StartUp;
 import com.abdulrahman.final_Project.Start_up.StartUpRepo;
 import com.abdulrahman.final_Project.exception.ApiException;
@@ -32,17 +33,19 @@ public class AdvisorService {
     public List<Advisor> getAdvisors(){
         return advisorRepo.findAll();
     }
-    public void addAdvisor(Advisor store){
-        advisorRepo.save(store);
+    public void addAdvisor(Advisor advisor){
+
+        advisor.setUser(new MyUser(null,"dommyUser","1234","ADMIN",null,null));
+        advisorRepo.save(advisor);
 
     }
-    public void editAdvisor(Integer id,Advisor store){
+    public void editAdvisor(Integer id,Advisor advisor){
         Advisor temp = advisorRepo.findAdvisorById(id);
         if (temp == null) {
             throw new ApiException("Not found");
         }
-        temp.setName(store.getName());
-        temp.setSpeciality(store.getSpeciality());
+        temp.setName(advisor.getName());
+        temp.setSpeciality(advisor.getSpeciality());
         advisorRepo.save(temp);
 
     }

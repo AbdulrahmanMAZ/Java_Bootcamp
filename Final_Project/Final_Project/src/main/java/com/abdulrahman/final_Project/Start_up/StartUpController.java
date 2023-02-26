@@ -20,24 +20,24 @@ public class StartUpController {
     private final StartUpService startUpService;
 
     // getter
-    @GetMapping("/get_start_up")
+    @GetMapping("/admin/get_start_up")
     public List<StartUp> getBooks(){
         return startUpService.getStartUps();
     }
-    @PostMapping("/add_start_up")
+    @PostMapping("/admin/add_start_up")
 
     public ResponseEntity addBooks( @RequestBody StartUp startUp){
                 startUpService.addStartUp(startUp);
                 return ResponseEntity.status(200).body("Success");
 
     }
-    @PutMapping("/edit_start_up")
+    @PutMapping("/admin/edit_start_up")
     public ResponseEntity updateBooks(@PathVariable Integer id, @RequestBody StartUp startUp){
         startUpService.editStartUp(id, startUp);
         return ResponseEntity.status(200).body("Updated");
 
     }
-    @DeleteMapping("/delete_start_up")
+    @DeleteMapping("/admin/delete_start_up")
     public ResponseEntity updateBooks(@PathVariable Integer id){
         startUpService.deleteStartUp(id);
         return ResponseEntity.status(200).body("Updated");

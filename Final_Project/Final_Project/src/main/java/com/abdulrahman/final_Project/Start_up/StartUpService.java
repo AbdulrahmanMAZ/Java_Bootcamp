@@ -6,6 +6,7 @@ import com.abdulrahman.final_Project.Appointments.Appointments;
 import com.abdulrahman.final_Project.Appointments.AppointmentsRepo;
 import com.abdulrahman.final_Project.Appointments.AppointmentsService;
 import com.abdulrahman.final_Project.Feedback.Feedback;
+import com.abdulrahman.final_Project.MyUser.MyUser;
 import com.abdulrahman.final_Project.Review.Review;
 import com.abdulrahman.final_Project.Review.ReviewRepo;
 import com.abdulrahman.final_Project.Review.ReviewService;
@@ -42,6 +43,7 @@ public class StartUpService {
         return startUpRepo.findAll();
     }
     public void addStartUp(StartUp startUp){
+        startUp.setUser(new MyUser(null,"dommyUser","1234","ADMIN",null,null));
         startUpRepo.save(startUp);
 
     }

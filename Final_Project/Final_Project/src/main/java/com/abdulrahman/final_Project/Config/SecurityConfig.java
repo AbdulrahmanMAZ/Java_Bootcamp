@@ -39,6 +39,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.POST,"/api/v3/auth/register/**").permitAll()
                 .requestMatchers("/api/v3/admin/**").hasAuthority("ADMIN")
                 .requestMatchers("/api/v3/order/admin/**").hasAuthority("ADMIN")
+//                .requestMatchers("/api/v3/advisor/admin/**").hasAuthority("ADMIN")
                 .requestMatchers("/api/v3/advisor/**").hasAuthority("ADVISOR")
                 .requestMatchers("/api/v3/start-up/**").hasAuthority("STARTUP")
                 .anyRequest().authenticated()
