@@ -1,11 +1,10 @@
-package com.abdulrahman.final_Project.helper;
+package com.abdulrahman.final_Project.DTO;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.PositiveOrZero;
 
-public record StartUpRegisterFormDAO(@NotEmpty
+public record StartUpRegisterFormDTO(@NotEmpty
                                  @NotNull String username,
                                      @NotEmpty
                               @NotNull String password,

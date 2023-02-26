@@ -112,6 +112,16 @@ public class StartUpService {
         appointment.setAdvisor(advisor);
         appointment.setStartUp(startUp);
         appointment.setStatus("Pending");
+
+//        List<Appointments>  startUpAppointments = startUp.getAppointments();
+//        startUpAppointments.add(appointment);
+//        List<Appointments>  advisorAppointments = advisor.getAppointments();
+//        advisorAppointments.add(appointment);
+//        startUp.setAppointments(startUpAppointments);
+//        advisor.setAppointments(advisorAppointments);
+//        startUpRepo.save(startUp);
+//        advisorRepo.save(advisor);
+
         startUp.addAppointmentToMyAppointments(appointment);
         advisor.addAppointmentToMyAppointments(appointment);
 //        advisorRepo.save(advisor);
@@ -294,6 +304,7 @@ public class StartUpService {
             totalRating += review1.getRating();
             numberOfReviews++;
         }
+//        logger.info(String.valueOf(numberOfReviews));
         advisor.setRating(new BigDecimal(totalRating /numberOfReviews) );
 
         advisorRepo.save(advisor);

@@ -55,6 +55,8 @@ public class MyUserDetailsServiceTest {
     @Test
     public void loadUserByUsername(){
         when(authRepository.findMyUserByUsername(user.getUsername())).thenReturn(user);
+        when(authRepository.findMyUserByUsername(user.getUsername())).thenReturn(user);
+
         Assertions.assertThat(myUserDetailsService.loadUserByUsername(user.getUsername())).isEqualTo(user);
         verify(authRepository,times(1)).findMyUserByUsername(user.getUsername());
 

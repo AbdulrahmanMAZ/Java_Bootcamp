@@ -10,9 +10,8 @@ import com.abdulrahman.final_Project.StartUpDetails.StartUpDetails;
 import com.abdulrahman.final_Project.StartUpDetails.StartUpDetailsRepo;
 import com.abdulrahman.final_Project.Start_up.StartUp;
 import com.abdulrahman.final_Project.Start_up.StartUpRepo;
-import com.abdulrahman.final_Project.Start_up.StartUpService;
-import com.abdulrahman.final_Project.helper.AdvisorRegisterFormDAO;
-import com.abdulrahman.final_Project.helper.StartUpRegisterFormDAO;
+import com.abdulrahman.final_Project.DTO.AdvisorRegisterFormDTO;
+import com.abdulrahman.final_Project.DTO.StartUpRegisterFormDTO;
 
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -34,7 +33,7 @@ public class AuthService {
     private Logger logger = LoggerFactory.getLogger(AuthService.class);
 
 
-    public void registerAdvisor(AdvisorRegisterFormDAO myUserData){
+    public void registerAdvisor(AdvisorRegisterFormDTO myUserData){
         MyUser myUser = new MyUser();
         // Creating a user of type MyUser
         myUser.setRole("ADVISOR");
@@ -63,7 +62,7 @@ public class AuthService {
 
 
     }
-    public void registerStartUp(StartUpRegisterFormDAO myUserData){
+    public void registerStartUp(StartUpRegisterFormDTO myUserData){
         MyUser myUser = new MyUser();
         // Creating a user of type MyUser
         myUser.setRole("STARTUP");
