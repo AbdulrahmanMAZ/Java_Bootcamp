@@ -40,15 +40,15 @@ public class MyUserDetailsServiceTest {
 
     @BeforeEach
     void setUp() {
-        user=new MyUser(null,"Abdulrahman","12345","USER", null);
-        todo1=new Todo(null,"todo1",user);
-        todo2=new Todo(null,"todo2",user);
-        todo3=new Todo(null,"todo3",null);
-
-        todos=new ArrayList<>();
-        todos.add(todo1);
-        todos.add(todo2);
-        todos.add(todo3);
+//        user=new MyUser(null,"Abdulrahman","12345","USER", null);
+//        todo1=new Todo(null,"todo1",user);
+//        todo2=new Todo(null,"todo2",user);
+//        todo3=new Todo(null,"todo3",null);
+//
+//        todos=new ArrayList<>();
+//        todos.add(todo1);
+//        todos.add(todo2);
+//        todos.add(todo3);
     }
 
 

@@ -71,9 +71,9 @@ public class AdvisorController {
 
     }
     @PutMapping("/accept_appointment/{appointmentID}/{startUp_ID}")
-    public ResponseEntity AcceptAppointment(@PathVariable Integer appointmentID,@PathVariable Integer startUp_ID,@AuthenticationPrincipal MyUser myUser){
+    public ResponseEntity<Response> AcceptAppointment(@PathVariable Integer appointmentID,@PathVariable Integer startUp_ID,@AuthenticationPrincipal MyUser myUser){
         advisorService.AcceptAppointment(appointmentID,startUp_ID,myUser.getId());;
-        return ResponseEntity.status(200).body("This appointment has been Accepted and the bill has been sent to the start-up");
+        return ResponseEntity.status(200).body(new Response("This appointment has been Accepted and the bill has been sent to the start-up",200));
 
     }
     @PutMapping("/reject_appointment/{appointmentID}/{startUp_ID}")
@@ -83,9 +83,9 @@ public class AdvisorController {
 
     }
     @PutMapping("/complete_appointment_feedback/{appointmentID}/{startUp_ID}")
-    public ResponseEntity getUpcomingAppointment(@PathVariable Integer appointmentID,@PathVariable Integer startUp_ID,@AuthenticationPrincipal MyUser myUser, @RequestBody Feedback feedback){
+    public ResponseEntity<Response> completeAppointment(@PathVariable Integer appointmentID,@PathVariable Integer startUp_ID,@AuthenticationPrincipal MyUser myUser, @RequestBody Feedback feedback){
          advisorService.CompleteAppointmentAndWriteFeedback(appointmentID,startUp_ID,myUser.getId(),feedback);;
-        return ResponseEntity.status(200).body("This appointment has been marked complete and feed back has been sent");
+        return ResponseEntity.status(200).body(new Response("This appointment has been marked complete and feed back has been sent",200));
 
 
     }

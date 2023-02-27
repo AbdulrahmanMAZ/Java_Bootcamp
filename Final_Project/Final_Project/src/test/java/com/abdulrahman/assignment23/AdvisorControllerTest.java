@@ -11,6 +11,7 @@ import com.abdulrahman.final_Project.Auth.AuthService;
 import com.abdulrahman.final_Project.DTO.AdvisorRegisterFormDTO;
 import com.abdulrahman.final_Project.DTO.Response;
 import com.abdulrahman.final_Project.DTO.StartUpRegisterFormDTO;
+import com.abdulrahman.final_Project.Feedback.Feedback;
 import com.abdulrahman.final_Project.MyUser.MyUser;
 import com.abdulrahman.final_Project.Review.Review;
 import com.abdulrahman.final_Project.Start_up.StartUp;
@@ -85,7 +86,7 @@ public class AdvisorControllerTest {
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
 
 
-        AdvisorRegisterFormDTO advisor =new AdvisorRegisterFormDTO("Abdulrahman","12345","Abdulrahman@gmail.com", "Phsyco",40,"Male","Abdulrahman","Salem","0525136537");
+//        AdvisorRegisterFormDTO advisor =new AdvisorRegisterFormDTO("Abdulrahman","12345","Abdulrahman@gmail.com", "Phsyco",40,"Male","Abdulrahman","Salem","0525136537");
         ResponseEntity<Response> responseEntity = advisorController.rescheduleAppointment(appointment.getId(),startUp1.getId(),myUser,time);
         Assertions.assertThat(responseEntity.getStatusCode().value()).isEqualTo(200);
         Response response = new Response("Your appointment has been Updated",200);
@@ -93,20 +94,32 @@ public class AdvisorControllerTest {
 
     }
 //
-//    @Test
-//    public void registerStartUpControllerTest(){
-//
-//        MockHttpServletRequest request = new MockHttpServletRequest();
-//        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
-//
-//
+    @Test
+    public void acceptAppointmentTest(){
+
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+
+
 //        StartUpRegisterFormDTO startUp =new StartUpRegisterFormDTO("Abdulrahman","12345","Abdulrahman@gmail.com", "Phsyco","Owner","Ryiadh","IT","0525136537");
-//        ResponseEntity<Response> responseEntity = authController.registerStartUp(startUp);
-//        Assertions.assertThat(responseEntity.getStatusCode().value()).isEqualTo(201);
-//        Response response = new Response("Start up has Registered successfully",201);
-//        Assertions.assertThat(responseEntity.getBody()).isEqualTo(response);
-//
-//    }
+        ResponseEntity<Response> responseEntity = advisorController.AcceptAppointment(appointment.getId(),startUp1.getId(),myUser);
+        Assertions.assertThat(responseEntity.getStatusCode().value()).isEqualTo(200);
+        Response response = new Response("This appointment has been Accepted and the bill has been sent to the start-up",200);
+        Assertions.assertThat(responseEntity.getBody()).isEqualTo(response);
+
+    }
+@Test
+    public void completeAppointmentTest(){
+
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+
+    ResponseEntity<Response> responseEntity = advisorController.completeAppointment(appointment.getId(),startUp1.getId(),myUser,new Feedback());
+        Assertions.assertThat(responseEntity.getStatusCode().value()).isEqualTo(200);
+        Response response = new Response("This appointment has been marked complete and feed back has been sent",200);
+        Assertions.assertThat(responseEntity.getBody()).isEqualTo(response);
+
+    }
 //
 
 
