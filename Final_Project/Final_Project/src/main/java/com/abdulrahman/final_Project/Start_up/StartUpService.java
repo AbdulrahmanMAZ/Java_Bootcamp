@@ -91,7 +91,8 @@ public class StartUpService {
         Appointments appointment;
         // check if the appointment is available by checking if any advisor / start up has an accepted appointment at the same time
         Appointments check_advisor_availability = appointmentsRepo.findAppointmentByDateTimeAndAdvisor_IdAndStatus(appointmentStartTime,advisor_id,"Accepted");
-        Appointments check_startUp_availability = appointmentsRepo.findAppointmentByDateTimeAndStartUp_Id(appointmentStartTime,startUp_id);
+        Appointments check_startUp_availability = appointmentsRepo.findAppointmentByDateTimeAndStartUp_IdAndStatusNotIn(appointmentStartTime,startUp_id,new ArrayList<>(
+                Arrays.asList("Completed","Paid")));
 //        Appointments check_startUp_availability_same = appointmentsRepo.findAppointmentByDateTimeAndStartUp_IdAndStatus(appointmentStartTime,startUp_id,"Accepted");
 
         if (check_advisor_availability == null && check_startUp_availability == null) {
@@ -149,7 +150,8 @@ public class StartUpService {
         Appointments appointment;
         // check if the new appointment is available
         Appointments check_advisor_availability = appointmentsRepo.findAppointmentByDateTimeAndAdvisor_Id(appointmentNewTime,advisor_id);
-        Appointments check_startUp_availability = appointmentsRepo.findAppointmentByDateTimeAndStartUp_Id(appointmentNewTime,startUp_id);
+        Appointments check_startUp_availability = appointmentsRepo.findAppointmentByDateTimeAndStartUp_IdAndStatusNotIn(appointmentNewTime,startUp_id,new ArrayList<>(
+                Arrays.asList("Completed","Paid")));
         if (check_advisor_availability == null && check_startUp_availability == null) {
             appointment = new Appointments(null,appointmentNewTime,"Pending",0,false,null,null,null);
         } else if (check_advisor_availability != null) {

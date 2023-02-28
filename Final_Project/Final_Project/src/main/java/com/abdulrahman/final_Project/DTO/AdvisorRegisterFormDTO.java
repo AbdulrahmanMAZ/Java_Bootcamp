@@ -5,8 +5,9 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.PositiveOrZero;
 
-public record AdvisorRegisterFormDTO(@NotEmpty
-                                 @NotNull String username,
+public record AdvisorRegisterFormDTO(
+//        @NotEmpty
+//                                 @NotNull String username,
                                      @NotEmpty
                               @NotNull String password,
                                      @Pattern(regexp = "^.+@.+\\.\\w{2,}$" ,message = "must be in this form XXX@XX.XX")

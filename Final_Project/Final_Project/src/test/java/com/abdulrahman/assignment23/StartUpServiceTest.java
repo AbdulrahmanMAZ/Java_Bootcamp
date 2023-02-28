@@ -129,7 +129,7 @@ public class StartUpServiceTest {
         when(startUpRepo.findStartUpById(startUp1.getId())).thenReturn(startUp1);
         when(advisorRepo.findAdvisorById(advisor1.getId())).thenReturn(advisor1);
         when(appointmentsRepo.findAppointmentByDateTimeAndAdvisor_IdAndStatus(dateTime,advisor1.getId(),"Accepted")).thenReturn(null);
-        when(appointmentsRepo.findAppointmentByDateTimeAndStartUp_Id(dateTime,startUp1.getId())).thenReturn(null);
+        when(appointmentsRepo.findAppointmentByDateTimeAndStartUp_IdAndStatusNot(dateTime,startUp1.getId(),"Completed")).thenReturn(null);
         int hours = dateTime.getHour();
         int minutes = dateTime.getMinute();
         String hours_minutes = hours+":"+minutes;

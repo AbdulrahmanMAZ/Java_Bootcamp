@@ -27,9 +27,9 @@ public class Advisor {
         @GeneratedValue(strategy = GenerationType.AUTO)
         private Integer id;
 
-        @NotEmpty
-        @NotNull
-        private String name;
+//        @NotEmpty
+//        @NotNull
+//        private String name;
 
         @NotEmpty
         @NotNull

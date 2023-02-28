@@ -37,7 +37,7 @@ public class AuthService {
         MyUser myUser = new MyUser();
         // Creating a user of type MyUser
         myUser.setRole("ADVISOR");
-        myUser.setUsername(myUserData.username());
+        myUser.setUsername(myUserData.email());
         String hashedPassword = new BCryptPasswordEncoder().encode(myUserData.password());
         myUser.setPassword(hashedPassword);
 
@@ -46,7 +46,7 @@ public class AuthService {
         // Creating the advisor entity
         Advisor advisor = new Advisor();
         advisor.setSpeciality(myUserData.speciality());
-        advisor.setName(myUserData.firstName());
+//        advisor.setName(myUserData.firstName());
         advisor.setFeePerHour(myUserData.feePerHour());
         advisor.setUser(savedUser);
         Advisor savedAdvisor = advisorRepo.save(advisor);
@@ -66,7 +66,7 @@ public class AuthService {
         MyUser myUser = new MyUser();
         // Creating a user of type MyUser
         myUser.setRole("STARTUP");
-        myUser.setUsername(myUserData.username());
+        myUser.setUsername(myUserData.email());
         String hashedPassword = new BCryptPasswordEncoder().encode(myUserData.password());
         myUser.setPassword(hashedPassword);
 

@@ -6,6 +6,7 @@ import org.hibernate.tool.schema.spi.CommandAcceptanceException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -24,10 +25,10 @@ public class AdviceController {
         String message = e.getMessage();
         return ResponseEntity.status(400).body(message);
     }
-//    @ExceptionHandler(value = CommandAcceptanceException.class)
-//    public ResponseEntity ApiException(CommandAcceptanceException e) {
+//    @ExceptionHandler(value =  UsernameNotFoundException.class)
+//    public ResponseEntity ApiException(UsernameNotFoundException e) {
 //        String message = e.getMessage();
-//        return ResponseEntity.status(400).body("Tried to deleted non exist relation");
+//        return ResponseEntity.status(400).body("Wrong credential");
 //    }
     @ExceptionHandler(value = DateTimeParseException.class)
     public ResponseEntity ApiException(DateTimeParseException e) {

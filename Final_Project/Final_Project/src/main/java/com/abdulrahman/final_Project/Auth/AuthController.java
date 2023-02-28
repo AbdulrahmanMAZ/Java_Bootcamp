@@ -41,6 +41,8 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.OK).body("Welcome Start Up");
         } else if (myUser.getRole().equals("ADVISOR")) {
             return ResponseEntity.status(HttpStatus.OK).body("Welcome Advisor");
+        }else if(myUser == null){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Wrong credential");
         }
         else {
             return ResponseEntity.status(HttpStatus.OK).body("Welcome You");

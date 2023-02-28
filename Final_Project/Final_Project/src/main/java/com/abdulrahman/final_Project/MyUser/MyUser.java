@@ -23,7 +23,9 @@ public class MyUser implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(unique = true)
+
+    @Pattern(regexp = "^.+@.+\\.\\w{2,}$" , message = "must be in this form XXX@XX.XX")
+    @Column(columnDefinition = "varchar(40) unique not null")
     private String username;
     @Column(nullable = false)
     private String password;

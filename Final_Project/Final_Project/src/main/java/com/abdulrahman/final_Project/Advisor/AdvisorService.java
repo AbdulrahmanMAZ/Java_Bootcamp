@@ -11,10 +11,15 @@ import com.abdulrahman.final_Project.Start_up.StartUp;
 import com.abdulrahman.final_Project.Start_up.StartUpRepo;
 import com.abdulrahman.final_Project.exception.ApiException;
 import com.abdulrahman.final_Project.helper.MyTimeService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -27,7 +32,7 @@ public class AdvisorService {
     final private StartUpRepo startUpRepo;
     final private FeedbackService feedbackService;
     final private FeedbackRepo feedbackRepo;
-
+    final private Logger logger = LoggerFactory.getLogger(AdvisorService.class);
 
 
     public List<Advisor> getAdvisors(){
@@ -44,7 +49,7 @@ public class AdvisorService {
         if (temp == null) {
             throw new ApiException("Not found");
         }
-        temp.setName(advisor.getName());
+        temp.setFeePerHour(advisor.getFeePerHour());
         temp.setSpeciality(advisor.getSpeciality());
         advisorRepo.save(temp);
 
@@ -75,7 +80,8 @@ public class AdvisorService {
         Appointments appointment;
         // check if the appointment is available
         Appointments check_advisor_availability = appointmentsRepo.findAppointmentByDateTimeAndAdvisor_Id(appointmentStartTime,advisor_id);
-        Appointments check_startUp_availability = appointmentsRepo.findAppointmentByDateTimeAndStartUp_Id(appointmentStartTime,startUp_id);
+        Appointments check_startUp_availability = appointmentsRepo.findAppointmentByDateTimeAndStartUp_IdAndStatusNotIn(appointmentStartTime,startUp_id,new ArrayList<>(
+                Arrays.asList("Completed","Paid")));
         if (check_advisor_availability == null && check_startUp_availability == null) {
             appointment = new Appointments(null,appointmentStartTime,"Pending",0,false,null,null,null);
         } else if (check_advisor_availability != null) {
@@ -157,8 +163,11 @@ public class AdvisorService {
         appointmentsRepo.save(appointment);
 
     }
-
+    @Transactional
     public void AcceptAppointment(Integer appointment_id, Integer startUp_id, Integer advisor_id){
+        logger.info(appointment_id.toString());
+        logger.info(startUp_id.toString());
+        logger.info(advisor_id.toString());
         Appointments appointment = appointmentsRepo.findAppointmentsByIdAndAdvisor_IdAndStartUp_Id(appointment_id,advisor_id,startUp_id);
         if (appointment == null) {
             throw new ApiException("Appointment Not found");

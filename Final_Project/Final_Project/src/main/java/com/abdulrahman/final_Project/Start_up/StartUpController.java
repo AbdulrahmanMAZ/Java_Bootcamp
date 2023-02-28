@@ -46,7 +46,7 @@ public class StartUpController {
     @PutMapping("/book_appointment/{advisor_ID}/{dateTime}")
     public ResponseEntity bookAppointment(@AuthenticationPrincipal MyUser myUser, @PathVariable Integer advisor_ID, @PathVariable String dateTime){
         startUpService.bookAppointment(myUser.getId(), advisor_ID,dateTime);
-        return ResponseEntity.status(200).body("Your appointment has been Booked");
+        return ResponseEntity.status(200).body("Your appointment is now pending, the advisor now can accept ");
 
     }
     @PutMapping("/reschedule_appointment/{appointmentID}/{advisor_ID}/{dateTime}")
