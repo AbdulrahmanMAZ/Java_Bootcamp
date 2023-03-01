@@ -81,7 +81,7 @@ public class AdvisorService {
         // check if the appointment is available
         Appointments check_advisor_availability = appointmentsRepo.findAppointmentByDateTimeAndAdvisor_Id(appointmentStartTime,advisor_id);
         Appointments check_startUp_availability = appointmentsRepo.findAppointmentByDateTimeAndStartUp_IdAndStatusNotIn(appointmentStartTime,startUp_id,new ArrayList<>(
-                Arrays.asList("Completed")));
+                Arrays.asList("Completed","Paid")));
         if (check_advisor_availability == null && check_startUp_availability == null) {
             appointment = new Appointments(null,appointmentStartTime,appointments.getStatus(),appointments.getFee() == null ?0 : appointments.getFee(),false,appointments.getAdvisor(),appointments.getStartUp(),null);
         } else if (check_advisor_availability != null) {
