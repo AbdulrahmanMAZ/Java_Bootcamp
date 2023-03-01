@@ -31,8 +31,10 @@ public class Advisor {
 //        @NotNull
 //        private String name;
 
-        @NotEmpty
-        @NotNull
+//        @NotEmpty
+//        @NotNull
+        @Pattern(regexp = "^FINANCE||MANAGEMENT||MARKETING$",message = "Speciality must be user only")
+        @Column(columnDefinition = "varchar(15) not null check (speciality='FINANCE' || speciality='MANAGEMENT'|| speciality='MARKETING'  )")
         private String speciality;
         @NotNull
         @PositiveOrZero

@@ -13,6 +13,7 @@ import com.abdulrahman.final_Project.Start_up.StartUpRepo;
 import com.abdulrahman.final_Project.DTO.AdvisorRegisterFormDTO;
 import com.abdulrahman.final_Project.DTO.StartUpRegisterFormDTO;
 
+import com.abdulrahman.final_Project.exception.ApiException;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,12 +45,21 @@ public class AuthService {
         MyUser savedUser = authRepo.save(myUser);
 
         // Creating the advisor entity
-        Advisor advisor = new Advisor();
-        advisor.setSpeciality(myUserData.speciality());
+        Advisor savedAdvisor;
+//        try{
+            Advisor advisor = new Advisor();
+            advisor.setSpeciality(myUserData.speciality());
 //        advisor.setName(myUserData.firstName());
-        advisor.setFeePerHour(myUserData.feePerHour());
-        advisor.setUser(savedUser);
-        Advisor savedAdvisor = advisorRepo.save(advisor);
+            advisor.setFeePerHour(myUserData.feePerHour());
+            advisor.setUser(savedUser);
+             savedAdvisor = advisorRepo.save(advisor);
+//        }catch (Exception e){
+//            authRepo.delete(savedUser);
+//            throw new ApiException("You are only allowed to choose FINANCE, MANAGEMENT, Or MARKETING speciality");
+//
+//        }
+
+
         // Creating the advisor details entity
         AdvisorDetails advisorDetails = new AdvisorDetails();
         advisorDetails.setEmail(myUserData.email());
