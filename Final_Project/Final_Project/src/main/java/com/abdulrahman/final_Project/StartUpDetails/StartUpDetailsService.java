@@ -34,7 +34,7 @@ public class StartUpDetailsService {
         if (temp == null) {
             throw new ApiException("Not found");
         }
-        temp.setName(store.getName());
+//        temp.setName(store.getName());
         temp.setEmail(store.getEmail());
         temp.setBasedIn(store.getBasedIn());
         temp.setOwnerName(store.getOwnerName());

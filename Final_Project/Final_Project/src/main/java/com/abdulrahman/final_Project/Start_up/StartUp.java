@@ -31,7 +31,7 @@ public class StartUp
 
     @NotEmpty
     @NotNull
-    private String name;
+    private String nameOfStartUp;
 
 
     @NotEmpty

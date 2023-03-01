@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v3/")
+@RequestMapping("/api/v3/admin")
 @RequiredArgsConstructor
 public class FeedbackController {
 

@@ -36,15 +36,15 @@ public class Advisor {
         @Pattern(regexp = "^FINANCE||MANAGEMENT||MARKETING$",message = "Speciality must be user only")
         @Column(columnDefinition = "varchar(15) not null check (speciality='FINANCE' || speciality='MANAGEMENT'|| speciality='MARKETING'  )")
         private String speciality;
-        @NotNull
-        @PositiveOrZero
+        @NotNull(message = "feePerHour must have a positive value ")
+        @PositiveOrZero(message = "feePerHour must have a positive value ")
         private Integer feePerHour;
-        @PositiveOrZero
+        @PositiveOrZero(message = "feePerHour must have a positive value ")
         private Integer Wallet=0;
 
 
-        @Min(1)
-        @Max(5)
+        @Min(value = 1,message = "Rating must be bigger than 1 and less than five")
+        @Max(value = 5,message = "Rating must be bigger than 1 and less than five")
         @Digits(integer = 1,fraction = 1)
         private BigDecimal rating=new BigDecimal(1);
 

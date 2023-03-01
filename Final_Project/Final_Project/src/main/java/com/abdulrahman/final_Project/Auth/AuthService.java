@@ -84,17 +84,17 @@ public class AuthService {
 
         StartUp startUp = new StartUp();
         startUp.setIndustry(myUserData.industry());
-        startUp.setName(myUserData.name());
+        startUp.setNameOfStartUp(myUserData.nameOfStartUp());
         startUp.setUser(savedUser);
         StartUp savedStartUp = startUpRepo.save(startUp);
-        logger.info(savedStartUp.getName());
+        logger.info(savedStartUp.getNameOfStartUp());
         // Creating the start-up details entity
         StartUpDetails startUpDetails = new StartUpDetails();
         startUpDetails.setEmail(myUserData.email());
         startUpDetails.setOwnerName(myUserData.ownerName());
         startUpDetails.setBasedIn(myUserData.basedIn());
         startUpDetails.setPhoneNumber(myUserData.phoneNumber());
-        startUpDetails.setName(myUserData.name());
+//        startUpDetails.setName(myUserData.name());
         startUpDetails.setStartUp(savedStartUp);
         logger.info(startUpDetails.getOwnerName());
         startUpDetailsRepo.save(startUpDetails);

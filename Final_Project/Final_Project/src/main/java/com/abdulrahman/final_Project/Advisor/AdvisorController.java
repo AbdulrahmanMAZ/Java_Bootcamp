@@ -33,9 +33,9 @@ public class AdvisorController {
                 return ResponseEntity.status(200).body("Success");
 
     }
-    @PutMapping("/admin/edit_advisor/{id}")
-    public ResponseEntity updateAdvisors(@PathVariable Integer id,@Valid  @RequestBody Advisor _advisor){
-        advisorService.editAdvisor(id,_advisor);
+    @PutMapping("/edit_advisor")
+    public ResponseEntity updateAdvisors(@AuthenticationPrincipal MyUser myUser,@Valid  @RequestBody Advisor _advisor){
+        advisorService.editAdvisor(myUser.getId(),_advisor);
         return ResponseEntity.status(200).body("Updated");
 
     }
@@ -89,5 +89,6 @@ public class AdvisorController {
 
 
     }
+
 
 }

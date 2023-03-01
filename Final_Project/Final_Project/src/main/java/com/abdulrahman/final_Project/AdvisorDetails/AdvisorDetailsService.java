@@ -23,11 +23,11 @@ public class AdvisorDetailsService {
     public List<AdvisorDetails> getAdvisorDetails(){
         return advisorDetailsRepo.findAll();
     }
-    public void addStore(AdvisorDetails store){
+    public void addAdvisorDetails(AdvisorDetails store){
         advisorDetailsRepo.save(store);
 
     }
-    public void editStore(Integer id, AdvisorDetails store){
+    public void editAdvisorDetails(Integer id, AdvisorDetails store){
         AdvisorDetails temp = advisorDetailsRepo.findAdvisorDetailsById(id);
         if (temp == null) {
             throw new ApiException("Not found");
@@ -42,7 +42,7 @@ public class AdvisorDetailsService {
         advisorDetailsRepo.save(temp);
 
     }
-    public void deleteStore(Integer id){
+    public void deleteAdvisorDetails(Integer id){
         AdvisorDetails temp = advisorDetailsRepo.findAdvisorDetailsById(id);
         if (temp == null) {
             throw new ApiException("Not found");

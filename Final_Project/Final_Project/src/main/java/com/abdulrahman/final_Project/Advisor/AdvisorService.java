@@ -81,9 +81,9 @@ public class AdvisorService {
         // check if the appointment is available
         Appointments check_advisor_availability = appointmentsRepo.findAppointmentByDateTimeAndAdvisor_Id(appointmentStartTime,advisor_id);
         Appointments check_startUp_availability = appointmentsRepo.findAppointmentByDateTimeAndStartUp_IdAndStatusNotIn(appointmentStartTime,startUp_id,new ArrayList<>(
-                Arrays.asList("Completed","Paid")));
+                Arrays.asList("Completed")));
         if (check_advisor_availability == null && check_startUp_availability == null) {
-            appointment = new Appointments(null,appointmentStartTime,"Pending",0,false,null,null,null);
+            appointment = new Appointments(null,appointmentStartTime,appointments.getStatus(),appointments.getFee() == null ?0 : appointments.getFee(),false,appointments.getAdvisor(),appointments.getStartUp(),null);
         } else if (check_advisor_availability != null) {
             throw new ApiException("This advisor is not available at this time, please try another date");
         } else if (check_startUp_availability != null){
@@ -192,18 +192,5 @@ public class AdvisorService {
 
     }
 
-//    public void RejectAppointment(Integer appointment_id, Integer startUp_id, Integer advisor_id){
-//        Appointments appointment = appointmentsRepo.findAppointmentsByIdAndAdvisor_IdAndStartUp_Id(appointment_id,advisor_id,startUp_id);
-//        if (appointment == null) {
-//            throw new ApiException("Appointment Not found");
-//        }
-//        Advisor advisor = advisorRepo.findAdvisorById(advisor_id);
-//        if (advisor == null) {
-//            throw new ApiException("Start up Not found");
-//        }
-//
-//        appointment.setStatus("Rejected");
-//        appointmentsRepo.save(appointment);
-//
-//    }
+
 }

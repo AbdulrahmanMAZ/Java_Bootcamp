@@ -17,15 +17,17 @@ public class Review {
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @NotNull
-    @NotEmpty
+    @NotNull(message = "title field must not be nul")
+    @NotEmpty(message = "title must not be empty")
+    @Size(max = 40,message = "you've exceeded the character limit which is 40")
     private String title;
     @NotNull
     @NotEmpty
+    @Size(max = 40,message = "you've exceeded the character limit which is 240")
     private String content;
     @NotNull
-    @Min(1)
-    @Max(5)
+    @Min(value = 1,message = "Rating must be bigger than 1 and less than five")
+    @Max(value = 5,message = "Rating must be bigger than 1 and less than five")
     private Integer rating;
 
     @ManyToOne

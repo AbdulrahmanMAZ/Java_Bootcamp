@@ -8,9 +8,9 @@ import java.util.List;
 
 @AllArgsConstructor
 @Data
-public class Response {
+public class ResponseList {
 
-    private String message;
+    private List<Advisor> advisors;
     private Integer status;
 
 }

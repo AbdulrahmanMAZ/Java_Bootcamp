@@ -26,12 +26,12 @@ public class AdvisorDetails {
     private Integer id;
 
 
-    @NotEmpty
-    @NotNull
+    @NotEmpty(message = "First name should not be empty")
+    @NotNull(message = "firstName field should not be null")
     private String firstName;
 
-    @NotEmpty
-    @NotNull
+    @NotEmpty(message = "Last name should not be empty")
+    @NotNull(message = "Last name field should not be null")
     private String lastName;
 
     @NotEmpty
@@ -54,6 +54,8 @@ public class AdvisorDetails {
 
     private String livesIn;
 
+    @Pattern(regexp = "^MALE||FEMALE",message = "Gender must be either a MALE or FEMALE")
+    @Column(columnDefinition = "varchar(15) not null check (gender='MALE' || gender='FEMALE'  )")
     private String gender;
 
     private String Overview;

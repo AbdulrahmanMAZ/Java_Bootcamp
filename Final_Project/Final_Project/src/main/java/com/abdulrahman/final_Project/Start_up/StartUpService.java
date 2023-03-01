@@ -2,6 +2,8 @@ package com.abdulrahman.final_Project.Start_up;
 
 import com.abdulrahman.final_Project.Advisor.Advisor;
 import com.abdulrahman.final_Project.Advisor.AdvisorRepo;
+import com.abdulrahman.final_Project.AdvisorDetails.AdvisorDetails;
+import com.abdulrahman.final_Project.AdvisorDetails.AdvisorDetailsRepo;
 import com.abdulrahman.final_Project.Appointments.Appointments;
 import com.abdulrahman.final_Project.Appointments.AppointmentsRepo;
 import com.abdulrahman.final_Project.Appointments.AppointmentsService;
@@ -39,6 +41,7 @@ public class StartUpService {
     final private ReviewRepo reviewRepo;
     final private ReviewService reviewService;
 
+    final private AdvisorDetailsRepo advisorDetailsRepo;
     public List<StartUp> getStartUps(){
         return startUpRepo.findAll();
     }
@@ -53,7 +56,7 @@ public class StartUpService {
             throw new ApiException("Not found");
         }
 
-        temp.setName(startUp.getName());
+        temp.setNameOfStartUp(startUp.getNameOfStartUp());
         temp.setIndustry(startUp.getIndustry());
 //        temp.set(customer.getStore());
         startUpRepo.save(temp);
@@ -153,7 +156,7 @@ public class StartUpService {
         Appointments check_startUp_availability = appointmentsRepo.findAppointmentByDateTimeAndStartUp_IdAndStatusNotIn(appointmentNewTime,startUp_id,new ArrayList<>(
                 Arrays.asList("Completed","Paid")));
         if (check_advisor_availability == null && check_startUp_availability == null) {
-            appointment = new Appointments(null,appointmentNewTime,"Pending",0,false,null,null,null);
+            appointment = new Appointments(null,appointmentNewTime,appointments.getStatus(),appointments.getFee() == null ?0 : appointments.getFee(),false,appointments.getAdvisor(),appointments.getStartUp(),null);
         } else if (check_advisor_availability != null) {
             throw new ApiException("This advisor is not available at this time, please try another date");
         } else if (check_startUp_availability != null){
@@ -187,20 +190,24 @@ public class StartUpService {
 
         // check if the current time is before the appointment date by two days.
         LocalDateTime current =  LocalDateTime.now();
-        if (!current.plusDays(2).isBefore(appointment.getDateTime()) && appointment.getStatus().equals("Paid")){
+        if (!current.plusDays(2).isBefore(appointment.getDateTime())){
             throw new ApiException("You can not cancel this appointment ,you cna only cancel appointments before two days (48 hours)");
         }
 
 
-        if (appointment.getStatus().equals("Paid")) {
+        else if (appointment.getStatus().equals("Paid") && current.plusDays(2).isBefore(appointment.getDateTime())) {
             advisor.refund(appointment.getFee());
             startUp.addMoneyToWallet(appointment.getFee());
             advisorRepo.save(advisor);
             startUpRepo.save(startUp);
+            appointmentsRepo.delete(appointment);
 
         }
+        else if ((appointment.getStatus().equals("Pending")||appointment.getStatus().equals("Accepted")) && current.plusDays(2).isBefore(appointment.getDateTime())) {
+            appointmentsRepo.delete(appointment);
+        }
 
-        appointmentsRepo.delete(appointment);
+
     }
     public List<Appointments> pendingAppointments( Integer startUp_id){
         StartUp startUp = startUpRepo.findStartUpById(startUp_id);
@@ -226,7 +233,18 @@ public class StartUpService {
     return appointments;
 
     }
+    public List<Appointments> CompletedAppointments( Integer startUp_id){
+        StartUp startUp = startUpRepo.findStartUpById(startUp_id);
+        if (startUp == null) {
+            throw new ApiException("Start up Not found");
+        }
+        List<Appointments> appointments = appointmentsRepo.findAllByStartUpAndStatus(startUp,"Completed");
+        if (appointments.isEmpty()) {
+            throw new ApiException("You have no completed appointments yet!");
+        }
+        return appointments;
 
+    }
     public void payAppointmentFee(Integer appointment_id, Integer startUp_id, Integer advisor_id){
         Appointments appointment = appointmentsRepo.findAppointmentsByIdAndAdvisor_IdAndStartUp_Id(appointment_id,advisor_id,startUp_id);
         if (appointment == null) {
@@ -312,5 +330,39 @@ public class StartUpService {
         advisorRepo.save(advisor);
     }
 
+    public  List<Advisor> ListAllAdvisors(){
+        List<Advisor> found_advisors = advisorRepo.findAll();
+        if (found_advisors.isEmpty()) {
+            throw new ApiException("There is no available advisors");
+        }
+        return  found_advisors;
+
+    }
+
+    public  List<Advisor> SearchForSpeciality(String speciality){
+       List<Advisor> found_advisors = advisorRepo.findAllBySpeciality(speciality);
+        if (found_advisors.isEmpty()) {
+            throw new ApiException("There is no available advisor with that speciality");
+        }
+        return  found_advisors;
+
+    }
+    public  List<Advisor> SortAdvisorsByRating(){
+        List<Advisor> found_advisors = advisorRepo.findByOrderByRatingDesc();
+        if (found_advisors.isEmpty()) {
+            throw new ApiException("There is no available advisor with that speciality");
+        }
+        return  found_advisors;
+
+    }
+
+    public  List<AdvisorDetails> findAdvisorByName(String first, String last){
+        List<AdvisorDetails> found_advisors = advisorDetailsRepo.findAllByFirstNameContainsIgnoreCaseAndLastNameContainsIgnoreCase(first,last);
+        if (found_advisors.isEmpty()) {
+            throw new ApiException("There is no available advisors");
+        }
+        return  found_advisors;
+
+    }
 
 }

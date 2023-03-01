@@ -29,9 +29,9 @@ public class StartUpDetails {
     @NotNull
     private String OwnerName;
 
-    @NotEmpty
-    @NotNull
-    private String name;
+//    @NotEmpty
+//    @NotNull
+//    private String name;
 
     @NotEmpty
     @Pattern(regexp = "^0\\d{9}$",message = "Must be 0XXXXXXXXX")
